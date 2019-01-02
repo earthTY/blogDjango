@@ -1,0 +1,59 @@
+<footer id="footer">
+    <div class="footMenuWrap">
+        <div class="container">
+            <!--<dl v-for="navInfo in footernavList">
+                <dt>
+                    <a :href="navInfo.url">[[navInfo.name]]</a>
+                </dt>
+                <dd class="iconfont icon&#45;&#45;daxiajiantou" v-for="dropInfo in navInfo.dropmenu">
+                    <a v-if="dropInfo.hasOwnProperty('nofollow')" rel="nofollow" :href="dropInfo.url">[[dropInfo.name]]</a>
+                    <a v-else :href="dropInfo.url">[[dropInfo.name]]</a>
+                </dd>
+            </dl>-->
+            <div class="foot_menu">
+                <ul class="clearfix">
+                    <li class="bolder">CATEGORIES</li>
+                    <li v-for="(nav,index) in footernavList">
+                        <a :href="nav.url">[[nav.name]]</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="foot_menu">
+                <ul class="clearfix">
+                    <li class="bolder">
+                        <a :href="urlPageBase+'products'">PRODUCTS</a>
+                    </li>
+                    <li v-for="(nav,index) in productNavList">
+                        <a :href="nav.url">[[nav.name]]</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="foot_menu">
+                <ul style="padding-top: 38px">
+                    <li>
+                        <a rel="nofollow" :href="urlPageBase+'contact-us.html'">CONTACT US</a>
+                    </li>
+                    <li>
+                        <a rel="nofollow" :href="urlPageBase+'about-us.html'">ABOUT US</a>
+                    </li>
+                </ul>
+            </div>
+            <div style="width: 380px;font-size: 13px;padding-top: 30px">
+                <p>Healthguidewiki provides you with natural male enhancement tips, weight loss methods, best skin care products for beauty makeup by anti-aging & anti-wrinkle skin cream, nutrition tips and health news. You can buy original "TOP GUN Drops" for penis enlargement here, and to loss your weight quickly by "EASY LEAN", which contains no-side effects medications to trigger magical effects preserve the results achieved quickly as well.</p>
+            </div>
+            <div class="share">
+                <h4>FOLLOW US:</h4>
+                <ul>
+                    <li><a target="_blank" href="https://www.facebook.com/Top-Gun_Official-173929323223715/?ref=aymt_homepage_panel" rel="nofollow"><img :src="urlImgBase+'icon/facebook_icon.png'" /></a></li>
+                    <li><a target="_blank" href="https://www.youtube.com/channel/UCuY0iGhg-aQ-xhcu4bywqjw/featured" rel="nofollow"><img :src="urlImgBase+'icon/youtube_icon.png'" /></a></li>
+                    <!--<li><a href=""><img :src="urlImgBase+'icon/gmail_icon.png'" /></a></li>
+                    <li><a href=""><img :src="urlImgBase+'icon/twitter_icon.png'" /></a></li>
+                    <li><a href=""><img :src="urlImgBase+'icon/wb_icon.png'" /></a></li>
+                    <li><a href=""><img :src="urlImgBase+'icon/v_icon.png'" /></a></li>
+                    <li><a href=""><img :src="urlImgBase+'icon/t_icon.png'" /></a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">Healthguidewiki Copyright © 2018.</p>
+</footer>

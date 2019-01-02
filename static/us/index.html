@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="Keywords" content=" Natural Weight Loss, Beauty, Adults, Health Products Guide Tips">
+    <meta name="description" content="Healthguidewiki brings you the best natural weight loss tips to improve your diet. Boost your sexual performance. The best anti-aging secrets help you to get rid of varicose veins.">
+    <title>Natural Weight Loss, Beauty, Adults, Health Products Guide Tips – Healthguidewiki.com</title>
+    <link rel="canonical" href="https://www.healthguidewiki.com/" />
+    <link href="/static/css/lib/swiper.min.css" rel="stylesheet">
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/index.css" rel="stylesheet">
+
+    <script src="/static/js/lib/vue2.5.js"></script>
+    <script src="/static/js/lib/jquery2.2.3.js"></script>
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121440806-1');
+    </script>
+</head>
+<body>
+    <div id="vueContainer" v-cloak>
+        {% include "./include/navigation.html" %}
+        <section class="box-1 banner">
+            <swiper :options="bannerOption.swiperOption">
+                <swiper-slide v-for="item in bannerOption.bannerList">
+                    <img :src="item.imgSrc" :alt="item.title"/>
+                    <div class="bannerInfo">
+                        <p>[[item.info]]</p>
+                        <h1>[[item.title]]</h1>
+                        <a :href="item.url">Read More</a>
+                    </div>
+                </swiper-slide>
+            </swiper>
+        </section>
+        <section class="box-2 container">
+            <h2>Choose Your Beauty Goal</h2>
+            <main>
+                <ul>
+                    <li class="productItme"  v-for="item in productList">
+                        <div class="pro_img_box">
+                            <img :src="item.img_url" :alt="item.title"/>
+                            <div class="pro_info">
+                                <h3>[[item.title]]</h3>
+                                <p>[[item.introduction]]</p>
+                                <a :href="'{{ domain }}/products/'+item.url_title">VIEW MORE  ></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </main>
+        </section>
+        <section class="box-3 qualityBg">
+            <div class="container">
+                <h2>From the Latest Articles</h2>
+                <main>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <swiper :options="qualityOption.swiperOption">
+                        <!-- slides -->
+                        <swiper-slide v-for="item in qualityOption.qualityList">
+                            <a :href="'{{ domain }}/articles/'+item.url_title">
+                                <div><img :src="item.img_url" :alt="item.title"/></div>
+                                <div class="latest_item_info">
+                                    <p :title="item.title">[[item.title]]</p>
+                                </div>
+                            </a>
+                        </swiper-slide>
+                    </swiper>
+                </main>
+            </div>
+        </section>
+        {% include './include/footer.html' %}
+    </div>
+<script src="/static/js/lib/swiper.min.js"></script>
+<script src="/static/js/lib/vue-awesome-swiper.js"></script>
+<script src="/static/js/PC/english/config/Basicinformation.js"></script>
+    <script src="/static/js/PC/english/index.js"></script>
+    <script>
+        $(function(){
+            var controller;
+            if(!controller)
+                controller = new IndexPage();
+            controller.init()
+        })
+    </script>
+</body>
+</html>

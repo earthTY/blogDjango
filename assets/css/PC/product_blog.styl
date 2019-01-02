@@ -1,0 +1,84 @@
+@import 'base'
+
+#mainbody {
+  main {
+    .site_menu {
+      padding-left 54px
+    }
+    .product_item {
+      padding-right 20px
+    }
+    .blog_info {
+      padding 30px 39px 0 54px
+
+      .pro_imgHref {
+        padding-top 20px
+        display: flex;
+        justify-content: space-between;
+        /*&>div{
+          float left
+        }*/
+        .product_info {
+          /*          width 322px*/
+          padding 0 0 0 20px
+          font-size $font-normal
+
+          p {
+            line-height 1.5
+          }
+
+          a {
+            margin-top 15px
+            display block
+          }
+        }
+      }
+      .pro_article {
+        h2, h3, strong.h2, strong.h3 {
+          padding 10px 0
+          font-weight bold
+          font-size $font-bigs
+          line-height 1.2
+          display block
+        }
+        p {
+          padding 10px 0
+          font-size $font-normal
+          line-height 1.5
+        }
+
+        //.pro_img {
+        //  text-align center
+        //  img {
+        //    max-width 100%
+        //  }
+        //  p {
+        //    text-align center
+        //    padding-bottom 0
+        //  }
+        //}
+
+        a{
+          color #0782C1
+          text-decoration underline
+        }
+
+        img{
+          max-width 100%;
+          display block
+          margin 0 auto
+        }
+      }
+    }
+
+    .blog_buttonImg {
+      padding 0 20px
+    }
+
+    article {
+      padding-bottom 15px
+    }
+  }
+}
+
+@import "comments"

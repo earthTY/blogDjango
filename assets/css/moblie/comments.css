@@ -1,0 +1,128 @@
+#comments {
+  font-size: $font-normal;
+  padding-bottom: getRem(15);
+}
+#comments .comments_star i,
+#comments .userinfo i {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background: url("../../img/user.png") no-repeat center;
+  margin-right: getRem(5);
+}
+#comments h4 {
+  font-size: getRem(20);
+  text-align: center;
+  font-weight: 700;
+  padding: getRem(25) 0 getRem(10);
+  border-bottom: 1px solid #000;
+}
+#comments .star {
+  padding-left: getRem(35);
+  color: $solid-gray;
+  display: flex;
+}
+#comments .star .icon-wujiaoxing {
+  font-size: 30px;
+  margin: 0 getRem(2);
+}
+#comments .comments_star {
+  font-size: $font-normal;
+  padding: getRem(15) 0;
+}
+#comments .comments_star .userinfo {
+  display: flex;
+  align-items: center;
+}
+#comments p {
+  padding: getRem(10);
+  background-color: $bg-color;
+  line-height: 1.5;
+}
+#user_commit_comments {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.75);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  padding: getRem(15);
+}
+#user_commit_comments .userinfo {
+  padding-top: getRem(10);
+}
+#user_commit_comments .commit_star {
+  padding: 0 getRem(30);
+}
+#user_commit_comments .layer-group {
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+}
+#user_commit_comments .layer-group header {
+  padding: getRem(15) 0;
+  text-align: center;
+  color: #fff;
+  background-color: $font-green;
+  border-radius: 5px;
+}
+#user_commit_comments .layer-group .commit_comments {
+  padding: getRem(15);
+}
+#user_commit_comments .layer-group .commit_comments h2 {
+  font-size: $font-big;
+  font-weight: bold;
+  padding-bottom: getRem(15);
+}
+#user_commit_comments .layer-group .commit_comments p {
+  background-color: transparent;
+  color: #8c8a8a;
+  padding: 0;
+}
+#user_commit_comments .layer-group .commit_comments .userinfo {
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+#user_commit_comments .layer-group .commit_comments div label {
+  display: block;
+  font-size: $font-normal;
+  padding: getRem(15) 0 getRem(10);
+}
+#user_commit_comments .layer-group .commit_comments div input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: $bg-color;
+  height: getRem(50);
+  padding: 0 getRem(15);
+}
+#user_commit_comments .layer-group .commit_comments textarea {
+  width: 100%;
+  resize: none;
+  height: getRem(150);
+  border: none;
+  background-color: $bg-color;
+  font-size: $font-normal;
+  padding: getRem(15);
+  outline: none;
+}
+#user_commit_comments .layer-group footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: getRem(15);
+}
+#user_commit_comments .layer-group footer a {
+  display: inline-block;
+  padding: getRem(15) getRem(10);
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+#user_commit_comments .layer-group footer .cancel {
+  background-color: $bg-color;
+}

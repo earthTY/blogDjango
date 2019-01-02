@@ -1,0 +1,67 @@
+<header id="header">
+    <div class="headerwarp">
+        <div class="container">
+            <div class="menu pull-left">
+                <div class="logo">
+                    <a href="/" title="Weight Loss, Adults, Health and Beauty Tips at Healthguidewiki.com">
+                        <img src="/static/img/logo.png" alt="Healthguidewiki Logo">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li v-for="navInfo in navigationList" class="firstMenu icon_drop">
+                            <a :href="navInfo.url">[[navInfo.name]]
+                                <i v-if="navInfo.dropmenu.length>0" class="iconfont icon-xialajiantou"></i>
+                            </a>
+                            <ul class="dropDown" v-if="navInfo.dropmenu.length>0">
+                                <li v-for="dropInfo in navInfo.dropmenu"><a :href="dropInfo.url">[[dropInfo.name]]</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--<div class="language pull-right">
+                <ul>
+                    <li>
+                        <div class="currentLan">
+                            <img src="/static/img/Bitmap_1.png"/><span>English</span><i class="iconfont icon&#45;&#45;daxiajiantou text_info"></i>
+                        </div>
+                        <div class="dropDown">
+                            <p @click="changePageLan('us')"><img src="/static/img/Bitmap_1.png" alt=""/><span>English</span></p>
+
+                            <p @click="changePageLan('es')"><img src="/static/img/Bitmap_4.png" alt=""/><span>Español</span></p>
+
+                            <p @click="changePageLan('it')"><img src="/static/img/Bitmap_3.png" alt=""/><span>Italiano</span></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>-->
+        </div>
+    </div>
+    <div id="go_top">
+
+    </div>
+</header>
+
+
+<script>
+    $(function () {
+        $(window).scroll(function (ev) {
+            var ev = ev||event
+
+            var scrollTop =$(ev.target).scrollTop()
+
+            if(scrollTop>100){
+                $(".headerwarp").addClass("fixed_top")
+            }else{
+                $(".headerwarp").removeClass("fixed_top")
+            }
+
+            if(scrollTop>500){
+                $("#go_top").addClass("show")
+            }else{
+                $("#go_top").removeClass("show")
+            }
+        })
+    })
+</script>

@@ -1,0 +1,84 @@
+@import 'reset.styl'
+article{
+  padding-bottom getRem(15)
+  padding-top getRem(10)
+}
+
+
+.pro_lab{
+  border-bottom 1px solid #000000
+  border-top 1px solid #000000
+  padding getRem(5) 0
+
+  a{
+    display: inline-block
+    padding getRem(10) getRem(5)
+    margin getRem(5) 0
+    border: 1px solid #ccc
+    border-radius getRem(5)
+    font-size $font-short
+    color #cccccc
+  }
+}
+
+.blog_info{
+  font-size $font-normal
+  .pro_img{
+    padding getRem(10) 0
+    text-align center
+  }
+
+  .btn_a{
+    margin getRem(10) auto getRem(20)
+  }
+  .bolg_title{
+    padding 0 getRem(10)
+    //border-bottom 1px solid #000
+
+    h3,h1{
+      text-align center
+      font-weight 700
+      line-height 1.2
+      position relative
+      font-size $font-bigs
+
+      &::after{
+        content ""
+        width 70%
+        height 1px
+        background-color: #000
+        margin getRem(10) auto
+        display block
+      }
+    }
+
+    .pro_lab{
+      font-weight 600
+      width 70%
+      margin 0 aut0
+    }
+  }
+
+  .article{
+    font-size $font-big
+
+    h4,h2,strong.h2{
+      padding getRem(15) 0 0
+      text-align center
+      font-weight bolder
+    }
+    p{
+      line-height 1.5
+      padding getRem(10) 0
+    }
+
+    .pro_img{
+      text-align center
+      img{
+        max-width 100%
+      }
+    }
+  }
+}
+
+@import 'comments.styl'

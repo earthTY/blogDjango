@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="keywords" content="Beauty Tips, Look Younger, Beauty Tips for Women, New Product Reviews">
+    <meta name="description" content="The best beauty tips and new product reviews at healthguidewiki.com. The source of expert advice and the secret of keeping younger for the introduction of best skin care products, anti wrinkle cream and anti aging cream.">
+    <title>Beauty Tips, Techniques and Advices Make Women Look Younger – Healthguidewiki.com</title>
+    <link rel="canonical" href="https://www.healthguidewiki.com/beauty" />
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/product_list.css" rel="stylesheet">
+    <script src="/static/js/lib/vue2.5.js"></script>
+
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-121440806-1');
+</script>
+
+
+</head>
+<body>
+    <div id="vueContainer" v-cloak>
+        <navigation-bar></navigation-bar>
+        <div id="mainbody" class="container clearfix">
+            <main>
+                <header class="site_menu">
+                    <dl class="clearfix">
+                        <dt></dt>
+                        <dd><a href="/">HOME ></a></dd>
+                        <dd class="currentPage">BEAUTY</dd>
+                    </dl>
+                </header>
+                <section class="product_item" v-for="item in showProductList">
+                    <h2 class="article_title"><a :href="item.blogUrl">[[item.title]]</a></h2>
+                    <!--<div class="pro_lab">
+                        <span class="label_tab">Enter a promo code</span>
+                        <span class="label_book">Add a note</span>
+                    </div>-->
+                    <div class="detail clearfix">
+                        <div class="pro_img">
+                            <img :src="item.proImg" :alt="item.title" />
+                        </div>
+                        <div class="product_info">
+                            <p>[[item.proInfo]]</p>
+                            <a class="text_success" :href="item.blogUrl">[Continue Reading...]</a>
+                            <div style="margin-top: 5px" class="addthis_inline_share_toolbox"></div>
+                        </div>
+                    </div>
+                </section>
+                <div class="pageCenter" v-if="productList.length>8">
+                    <a class="prev">< Pre</a>
+                    <!--:class="{ disabled : (start_count/page_num + 1 == 1) }" @click="OnPrePage"></a>-->
+                    <ul class="pageList">
+                        <li class="active">1</li>
+                    </ul>
+                    <a class="next">Next ></a>
+
+                    <div class="goTo">
+                        <input type="text" @keyup.enter="goToPage($event,Math.ceil(productList.length/8))"/>
+                        <span>Total [[Math.ceil(productList.length/8)]]</span>
+                    </div>
+                </div>
+            </main>
+            <v-aside :basepro="basepro" :hotpro="hotpro" :hot_word="hot_word" menuname="Beauty"  bestproduct="Simple Young"></v-aside>
+        </div>
+        <footer-nav></footer-nav>
+    </div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b6c0f0c11c2d905"></script>
+<script src="/static/js/lib/jquery2.2.3.js"></script>
+<script src="/static/js/PC/english/config/Basicinformation.js"></script>
+<script src="/static/js/PC/english/component.js"></script>
+    <script src="/static/js/PC/english/beauty/product_list.js"></script>
+    <script>
+        $(function(){
+            var controller;
+            if(!controller)
+                controller = new ProductList();
+            controller.init()
+        })
+    </script>
+</body>
+</html>

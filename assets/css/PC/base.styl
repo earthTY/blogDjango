@@ -1,0 +1,197 @@
+@import 'reset'
+
+body{
+  background-color: $bg-color
+}
+
+.article_title{
+  font-size $font-superbig
+}
+
+.font-weight{
+  font-weight bold
+}
+
+
+
+.site_menu{
+  padding 20px 0 20px 63px
+  dl{
+    margin-left -23px
+  }
+  dt,dd{
+    float left
+    margin-right 10px
+  }
+  dt{
+    width 13px
+    height 13px
+    background-color: $font-color
+    font-size: $font-superbig
+    font-family ArialUnicodeMS
+  }
+  .currentPage{
+    color $font-color
+  }
+  border-bottom 1px solid $solid-gray
+}
+#mainbody{
+  margin 20px auto 65px
+  main{
+    background: #fff
+    width 850px
+    box-sizing border-box
+    float left
+  }
+
+  aside{
+    float right
+    width 340px
+    box-sizing border-box
+    section{
+      background-color: #fff
+      padding 10px
+      /*h3{
+        margin-bottom 15px
+      }*/
+
+      h1,h2,h3{
+        font-size $font-normal
+        font-weight bolder
+        padding-bottom 15px
+      }
+    }
+    section.top_prolist{
+      padding 20px 10px 10px
+      .aside_prolist{
+        li{
+          margin-bottom 13px
+        }
+        & div{
+          float left
+          width 74px
+
+          img{
+            width 100%
+          }
+        }
+        & p{
+          float right
+          width 210px
+          line-height 1.2
+          height 58px
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+        }
+      }
+    }
+
+    section+section{
+      margin-top 12px
+    }
+    .aside_lab{
+      display flex
+      justify-content flex-start
+      flex-wrap wrap
+    }
+    .aside_lab li{
+      margin-bottom 10px
+      a{
+        padding 15px
+        font-size $font-short
+        color $font-green
+        display block
+        border-radius 5px
+        border 1px solid $font-green
+        margin-right 10px
+      }
+    }
+
+
+    .address_wrap{
+      border 1px solid $solid-gray
+      margin-top 10px
+      padding 10px 20px
+
+      h5,p{
+        text-align center
+      }
+      h5{
+        font-size $font-normal
+        margin-bottom 10px
+      }
+      input,button{
+        display block
+        margin 0 auto
+      }
+      input{
+        width 264px
+        height 63px
+      }
+      button{
+        font-size $font-normal
+        width 160px
+        height 45px
+        background-color: #F0EAEA
+        border: none
+        outline none
+        margin 20px auto 10px
+        border-radius 5px
+      }
+    }
+  }
+
+  .pro_lab{
+    position relative
+    padding  10px 39px 10px 95px
+    border-top 1px solid #d6d3d3
+
+    a{
+      padding 5px 15px
+      white-space nowrap
+      display inline-block
+    }
+  }
+
+  .pro_lab::after{
+    content ""
+    position absolute;
+    background url("../../img/PC/icon.png")
+    left 54px
+    top 50%
+    transform translateY(-50%)
+    width: 31px;
+    height: 25px;
+    background-position: -24px -0px;
+  }
+
+    //��ǩ��Ϣ
+  .label_tab,.label_book{
+
+    display inline-block
+    padding 10px 5px 10px 40px
+    font-size $font-short
+    position relative
+  }
+  .label_tab::after,
+  .label_book::after {
+    content ""
+    position absolute;
+    background url("../../img/PC/icon.png")
+    left 5px
+    top 50%
+    transform translateY(-50%)
+  }
+  .label_tab::after {
+    width: 31px;
+    height: 25px;
+    background-position: -24px -0px;
+  }
+  .label_book::after{
+    width: 24px;
+    height: 27px;
+    background-position: -0px -0px;
+  }
+}

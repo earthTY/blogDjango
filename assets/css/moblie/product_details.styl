@@ -1,0 +1,59 @@
+@import "reset.styl"
+.pro_imgHref{
+  padding-bottom getRem(25)
+  h2{
+    padding getRem(15) getRem(35)
+    font-size getRem(20)
+    font-weight 600
+    line-height 1.5
+  }
+
+  .pro_img{
+    text-align center
+    width 100%
+
+    img{
+      width 100%
+    }
+  }
+
+  .product_info{
+    h3{
+      text-align center
+      font-weight 700
+      line-height 1.2
+      position relative
+      font-size $font-short
+      margin 0 getRem(80)
+
+      &::after{
+        content ""
+        width 70%
+        height 1px
+        background-color: #000
+        margin getRem(10) auto
+        display block
+      }
+    }
+
+  }
+}
+
+.detail_info{
+  p{
+    font-size getRem(16)
+    line-height 1.5
+    padding getRem(10) 0
+  }
+}
+
+.article{
+  h4{
+    margin getRem(10) auto
+    text-align center
+    font-size $font-big
+    font-weight bold
+  }
+}
+
+@import 'comments.styl'

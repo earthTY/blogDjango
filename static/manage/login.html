@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>美吉健后台系统</title>
+    <script src="/static/js/lib/vue/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/manage/css/dmaku.css" />
+</head>
+<body>
+<div id="value_container">
+    <form method="post" action="" id="form1">
+        <div class="login">
+            <h2>Magic Hygeia</h2>
+            <div class="form">
+                <div class="check_msg"></div>
+                <div class="login_name">
+                    <input name="login_name" id="login_name" name="login_name" type="text" class="form_input" v-model="username" placeholder="请输入用户名" />
+                </div>
+                <div class="login_pwd">
+                    <input name="login_pwd" id="login_pwd" name="login_pwd" type="password" class="form_input" v-model="passwd" placeholder="请输入密码" />
+                </div>
+                <input name="btn_Login" type="button" id="btn_Login" class="btn_Login" value="登 录" @click="loginUser" />
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/static/js/lib/jquery2.2.3.js"></script>
+<script src="/static/manage/layer/layer.js"></script>
+<script src="/static/manage/js/common/commen.js"></script>
+<script src="/static/manage/js/common/login.js"></script>
+<!--<script>
+    $.ajax({
+        url:"/user_register",
+        method:"post",
+        data:{
+            username:"alex",
+            passwd:"123456"
+        }
+    }).done(function(retVal){
+        console.log(retVal)
+    })
+</script>-->
+</body>
+</html>

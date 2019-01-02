@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+
+		<meta name="keywords" content="ADULTS,Max Enhancer">
+		<meta name="description" content="{{ introduction }}">
+		<title>{{ title }} – Healthguidewiki.com</title>
+		<link rel="canonical" href="{{ url_title }}" />
+		<link href="/static/css/iconfont.css" rel="stylesheet">
+		<link href="/static/css/pc/product_blog.css" rel="stylesheet">
+		<script src="/static/js/lib/vue2.5.js"></script>
+        <script src="/static/js/lib/jquery2.2.3.js"></script>
+		<!--<link rel="shortcut icon" href="/static/img/favicon.ico">-->
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'UA-121440806-1');
+		</script>
+	</head>
+
+	<body>
+		<div id="vueContainer" v-cloak>
+{#			<navigation-bar></navigation-bar>#}
+
+            {% include "./include/navigation.html" %}
+
+			<div id="mainbody" class="container clearfix">
+				<main>
+					<header class="site_menu">
+						<dl class="clearfix">
+							<dt></dt>
+							<dd>
+								<a href="/">HOME ></a>
+							</dd>
+							<dd>
+								<a :href="urlPageBase+'adults'">{{ categories_info.menu }} ></a>
+							</dd>
+							<dd class="currentPage">{{ title }}</dd>
+						</dl>
+					</header>
+					<article>
+						<div class="blog_info">
+							<h1 class="article_title">{{ title }}</h1>
+
+							<div class="pro_article">
+                                {{ subject_body | safe }}
+							</div>
+						</div>
+                        {% if tags_list|length  > 0 %}
+                            <div class="pro_lab">
+                                {% for tag in tags_list %}
+                                    <a href="https://www.healthguidewiki.com/tag/{{ tag.tag_url }}'">{{ tag.tag_name }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+{#						<v-comments :comments="usercomments"></v-comments>#}
+                        {% include './include/comments.html' %}
+					</article>
+				</main>
+{#				<v-aside :basepro="basepro" :hotpro="hotpro" :hot_word="hot_word" menuname="Adults" bestproduct="TOP GUN Drops"></v-aside>#}
+            {% include './include/aside.html' %}
+			</div>
+{#			<footer-nav></footer-nav>#}
+            {% include './include/footer.html' %}
+		</div>
+		<script src="/static/js/PC/english/config/Basicinformation.js"></script>
+{#		<script src="/static/js/PC/english/component.js"></script>#}
+		<script src="/static/js/PC/english/bolg_page.js"></script>
+
+		<script>
+			$(function() {
+				var controller;
+				if(!controller)
+					controller = new BolgPage();
+				controller.init()
+			})
+		</script>
+		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b6c0f0c11c2d905"></script>
+	</body>
+</html>

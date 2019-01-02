@@ -1,0 +1,84 @@
+@import "base"
+
+#mainbody {
+  main {
+    .product_item {
+      margin-left 63px
+      padding 20px 0
+      border-bottom 1px solid $solid-gray
+      .article_title {
+        padding-bottom 20px
+      }
+      .detail {
+        & > div {
+          float left
+        }
+        .pro_img {
+          width 310px
+
+          img {
+            width 100%
+          }
+        }
+        .product_info {
+          width 322px
+          font-size $font-normal
+          padding-left 10px
+
+          p {
+            line-height 1.5
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            height 108px
+          }
+
+          a {
+            margin-top 15px
+            display block
+          }
+        }
+      }
+    }
+
+    .pageCenter {
+      padding 50px 0
+      display flex
+      align-items center
+      width max-content
+      margin 0 auto
+      font-size 14px
+      font-weight bolder
+
+      .pageList {
+        display flex
+        padding 0 10px
+
+        li {
+          padding 0 10px
+        }
+
+        li.active {
+          color #FF4F3F
+        }
+      }
+
+      .goTo {
+        padding-left 10px
+        input {
+          width: 100px
+          height 24px
+          border-radius 12px
+          outline none
+          border 1px solid #A7A8A8
+          padding 0 15px
+        }
+      }
+    }
+  }
+}
+
+.at-share-tbx-element .at-share-btn {
+  display inline-block !important
+}

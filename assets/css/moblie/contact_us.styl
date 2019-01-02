@@ -1,0 +1,73 @@
+@import 'reset.styl'
+body{
+  background-color: #fff
+}
+.site_menu{
+  padding-left 54px
+}
+  
+#mainbody>article{
+  border-bottom 1px solid $bg-color
+  padding getRem(20) 0 getRem(35)
+
+  h3{
+    font-size $font-bigs
+  }
+
+  .choose_lan{
+    margin-top 15px
+    padding 10px
+    background-color: $bg-color
+    font-weight 600
+    font-size $font-short
+
+
+    p{
+      display flex
+      justify-content space-between
+      padding getRem(12) 0
+
+      span{
+        display flex
+        align-items center
+        img{
+          margin-right getRem(5)
+        }
+      }
+    }
+  }
+
+  .contact_from{
+    padding getRem(15) 0
+    font-size $font-normal
+
+    p{
+      padding getRem(32) 0 getRem(15)
+    }
+
+    .from-group{
+      padding-top getRem(32)
+      label{
+        padding-bottom getRem(5)
+        display block
+        font-weight 600
+        span{
+          font-weight normal
+        }
+      }
+      input,textarea{
+        width 100%
+        height getRem(40)
+        outline none
+        font-size $font-short
+      }
+      textarea{
+        margin-top getRem(20)
+        height getRem(200)
+        background-color: $bg-color
+        border none
+        resize none
+      }
+    }
+  }
+}

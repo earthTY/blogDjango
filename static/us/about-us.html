@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="keywords" content="About Us, Healthguidewiki">
+    <meta name="description" content="We welcome your feedback about our site. If you have a query or comment, please get in touch via our contact us page. We do our best to respond to all emails promptly.">
+    <title>About Us - Healthguidewiki.com</title>
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/about_us.css" rel="stylesheet">
+    <script src="/static/js/lib/vue2.5.js"></script>
+    <script src="/static/js/lib/jquery2.2.3.js"></script>
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-121440806-1');
+</script>
+</head>
+<body>
+    <div id="vueContainer" v-cloak>
+        {% include "./include/navigation.html" %}
+        <div id="mainbody" class="container clearfix">
+            <header class="site_menu">
+                <dl class="clearfix">
+                    <dt></dt>
+					<dd><a href="/">HOME</a></dd>
+                    <dd class="currentPage">ABOUT US</dd>
+                </dl>
+            </header>
+            <article>
+                <div class="main_logo">
+                    <h3>ABOUT US</h3>
+                    <p><img src="/static/img/logo.png" alt="Healthguidewiki"/></p>
+                </div>
+                <div class="us_info">
+                    <h3>ABOUT US</h3>
+                    <p>Our exclusive focus on healthcare. We provide health and medical information to improve the health, many common ailments of our bodies are in fact the result of the deficiency of various vitamins, minerals and other essential elements, which can be replenished through supplements. Our service – healthguidewiki.com – was created for this very reason: to assist you in finding the right supplements, which will solve your problems and will also be safe for your health. However, our vast database covers not only health products, but also over-the- adult,lose weight,beauty, and even home remedies for a variety of health problems. With our help you will surely find your way though the thicket of supplements and select the solutions that will work best for you.</p>
+                </div>
+                <div class="us_info">
+                    <h3>Objective reviews and descriptions</h3>
+                    <p>There is a multitude medications of weight loss or penis enlargement on the market; then there is also a ton of home remedy advice. With us, you will find it easier to sort all this and through our users’ reviews or youtube video you will find out is a given solution is effective and safe for you. The database of medication and supplement reviews is in reality compiled by our users; this is why we very much encourage everybody to add their own opinions and observations regarding various medical products, as they will for sure be of help to other people seeking to solve their health problems.</p>
+                </div>
+                <div class="us_info">
+                    <h3>Variety is what makes us stand out</h3>
+                    <p>Health should be of utmost importance to each of us, and modern medicine offers an abundance of options. However, even serious problems can often be eliminated with home remedies, many times known and passed on from generation to generation, since time immemorial. This is why our service is characterized by vast diversity. No matter what health problem you are dealing with, here you will be able to find not only helpful lose weight , but also penis enlargement medications and Varicose veins home remedies, which take advantage of the gifts provided by nature and do not leave your wallet empty. Take care of your health using safe and proven solutions.</p>
+                    <p>The information on our site aims to help people understand and manage their health and medical conditions.</p>
+                </div>
+                <div class="us_info">
+                    <h3>How to contact the healthguidewiki.com</h3>
+                    <p>We welcome your feedback about our site. If you have a query or comment, please get in touch via our Contact us page. We do our best to respond to all emails promptly.</p>
+                </div>
+            </article>
+        </div>
+        {% include './include/footer.html' %}
+    </div>
+    <script src="/static/js/PC/english/config/Basicinformation.js"></script>
+    <script src="/static/js/PC/english/about_us.js"></script>
+    <script>
+        $(function(){
+            var controller;
+            if(!controller)
+                controller = new AboutUs();
+            controller.init()
+        })
+    </script>
+</body>
+</html>

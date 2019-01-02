@@ -1,0 +1,268 @@
+@import "reset.styl"
+.swiper-pagination{
+  .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color: #00c1c4
+  }
+}
+  
+body{
+  background-color: #fff
+}
+
+section.banner{
+  padding 10px 0 0
+
+  button.mybtn{
+    position absolute
+    padding 12px 15px
+    background-color: #FE790E
+    font-size $font-normal
+    color #ffffff
+    left 50%
+    top 0
+    transition all 0.2s
+    transform translateX(-50%)
+    border none
+    outline none
+    cursor pointer
+    display none
+    &:hover{
+      background: #FE4816
+    }
+  }
+}
+section.banner img{
+  width 100%
+}
+
+section{
+  &.container:not(.banner){
+    background #fff
+  }
+  padding 0 10px
+  h2{
+    font-family "Century Gothic"
+    word-spacing 0.8px
+    font-size 33px
+    text-align center
+    line-height 52px
+    position relative
+    display block
+    width max-content
+    width -moz-max-content
+    margin 80px auto 40px
+
+    &::before,&::after{
+      content ""
+      display block
+      width 166px
+      height 10px
+      position absolute
+      top 50%
+    }
+
+    &::before{
+      background url(../../img/PC/line_left.png)
+      left -10px
+      transform translate(-100%,-50%)
+    }
+
+    &::after{
+      background url(../../img/PC/line_right.png)
+      right -10px
+      transform translate(100%,-50%)
+    }
+  }
+
+  main{
+    ul{
+      display flex
+      justify-content space-between
+      flex-wrap wrap
+      padding 0 25px
+    }
+    .productItme{
+      width 530px
+      height 530px
+      padding-bottom 63px
+
+      .pro_img_box{
+        position relative
+        overflow hidden
+        height 100%
+
+        &::before{
+          content ""
+          width 100%
+          height 100%
+          position absolute
+          z-index 10
+          background rgba(0,0,0,0)
+          transition all 0.5s
+        }
+
+        &:hover::before{
+          background rgba(41,38,70,.7)
+        }
+
+        .pro_info{
+          position absolute
+          bottom 0
+          color: #fff
+          bottom 34px
+          z-index 100
+          opacity 0
+          transition all 0.5s
+
+          h3{
+            font-size 18px
+          }
+
+          p{
+            margin 15px 24px 54px
+          }
+
+          a{
+            display block
+            width 290px
+            height 65px
+            font-size 14px
+            margin 0 auto
+            color #ffffff
+            border: 1px solid #ffffff
+            text-align center
+            line-height 65px
+            font-weight bolder
+          }
+        }
+
+
+        &:hover .pro_info{
+          opacity 1
+        }
+      }
+
+      img{
+        width 100%
+      }
+      h3{
+        padding 22px 0 14px
+        font-size $font-normal
+        font-weight bolder
+        line-height 26px
+        text-align center
+      }
+      p{
+        font-size $font-normal
+        line-height 24px
+        text-align center
+        padding 0 15px
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+    }
+
+    .quality{
+      width 22%
+      font-size $font-big
+      p{
+        margin 14px 0 10px
+      }
+      h4{
+        font-weight bolder
+        text-align center
+      }
+    }
+  }
+}
+
+.box-2{
+  main{
+    height:1000px
+    overflow hidden
+  }
+}
+
+section.qualityBg{
+  background: #fff;
+  padding-bottom 30px
+
+  main{
+    position relative
+  }
+
+  & .swiper-slide{
+    width: 380px;
+  }
+
+  & .swiper-slide img{
+    width: 100%;
+  }
+
+  .swiper-button-prev{
+    top 45%
+    left -40px
+    background-image: url(../../img/PC/left.png)
+    opacity 1
+    background-size contain
+  }
+
+  .swiper-button-next{
+    top 45%
+    right -40px
+    background-image: url(../../img/PC/right.png)
+    opacity 1
+    background-size contain
+  }
+
+  .latest_item_info{
+    text-align center
+    padding: 30px 0 20px;
+    font-weight: bold;
+
+    p{
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+
+.bannerInfo{
+  position absolute
+  width 100%
+  left 50%
+  top 120px
+  transform translateX(-50%)
+  color #fff
+  text-align center
+
+  p{
+    font-size 36px
+  }
+
+  h1{
+    font-size 144px
+    padding 20px 0
+  }
+
+  a{
+    display block
+    width 318px
+    height 78px
+    color #ffffff
+    line-height 78px
+    text-align center
+    margin 0 auto
+    border 4px solid #ffffff
+    font-size 36px
+    font-family ArialUnicodeMS
+  }
+}
+
+
+

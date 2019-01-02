@@ -1,0 +1,221 @@
+@import 'reset.styl'
+body{
+  background #E6E2E2
+}
+
+.swiper-slide{
+  img{
+    width 100%
+  }
+}
+.swiper-pagination{
+  .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color: #00c1c4
+  }
+}
+section{
+  h2{
+    font-size $font-short
+    text-align center
+    font-weight bolder
+    line-height getRem(36)
+    position relative
+    width max-content
+    margin 0 auto
+    display block
+
+    &::before,&::after{
+      content ""
+      display block
+      width getRem(80)
+      height getRem(5)
+      position absolute
+      top 50%
+    }
+
+    &::before{
+      background url(../../img/PC/line_left.png)
+      left -10px
+      transform translate(-100%,-50%)
+      background-size contain
+    }
+
+    &::after{
+      background url(../../img/PC/line_right.png)
+      right -10px
+      transform translate(100%,-50%)
+      background-size contain
+    }
+  }
+
+  /*h2::before{
+       content ""
+       width 90%
+       height 1px
+       background: #000
+       position absolute
+       bottom 1px
+       left 50%
+       transform translateX(-50%)
+     }*/
+
+
+  main{
+    padding-top getRem(10)
+    ul{
+      display flex
+      justify-content space-between
+      flex-wrap wrap
+    }
+
+    .productItme{
+      padding-bottom getRem(30)
+      float left
+      width 48%
+      text-align center
+      font-size $font-short
+
+      h3{
+        padding getRem(15)
+      }
+
+      p{
+        line-height getRem(20)
+      }
+
+      img{
+        width 100%
+      }
+    }
+  }
+}
+
+.qualityBg{
+  margin getRem(15) 0 getRem(10)
+  padding-bottom getRem(30)
+  text-align center
+  font-size $font-short
+  .qualityInfo{
+    margin-top getRem(10)
+    line-height getRem(24)
+  }
+
+  img{
+    width getRem(190)
+  }
+}
+
+.mybtn{
+  display none
+}
+
+.banner{
+  .swiper-slide{
+    position relative
+
+    .bannerInfo{
+      position absolute
+      z-index 10
+      text-align center
+      color #ffffff
+      left 50%
+      top getRem(80)
+      transform translateX(-50%)
+      white-space nowrap
+      font-family "Arial MT"
+
+      h1{
+        font-size getRem(50)
+        color #ffffff
+      }
+
+      p{
+        font-size getRem(20)
+        padding getRem(25) 0 getRem(20)
+        color #ffffff
+      }
+
+      a{
+        font-family ArialUnicodeMS
+        font-size getRem(30)
+        color #ffffff
+        display block
+        padding getRem(10) getRem(30)
+        border getRem(3) solid #fff
+        width max-content
+        margin 0 auto
+      }
+    }
+  }
+}
+
+
+.subscribe{
+  text-align center
+  padding getRem(12) getRem(15) 0
+
+  h2{
+    font-family CenturyGothic
+    line-height 1.5
+
+    &::before,&::after{
+      display none
+    }
+  }
+  p{
+    font-family ArialUnicodeMS
+    font-size getRem(14)
+  }
+  
+  .inputBox{
+    background #FBFBFB
+    padding getRem(23) 0 getRem(28)
+    margin-top getRem(10)
+    border-radius getRem(5)
+    border 1px solid #D5D2D2
+
+    input{
+      display block
+      height getRem(35)
+      width getRem(300)
+      margin 0 auto
+      padding-left getRem(10)
+      outline none
+      border-radius getRem(5)
+      border 1px solid #9C9B9B
+    }
+
+    button{
+      width getRem(287)
+      font-size getRem(18)
+      font-family "Arial Black"
+      color #ffffff
+      background #000000
+      outline none
+      border 0
+      border-radius getRem(5)
+      padding getRem(5) 0
+      margin-top getRem(30)
+    }
+  }
+
+  .deliverd{
+    padding getRem(12) 0
+  }
+}
+
+section{
+  background #ffffff
+}
+
+.index_share{
+  padding getRem(16) 0 getRem(9)
+  background #E6E2E2
+  display flex
+  justify-content space-around
+
+  img{
+    width getRem(40)
+  }
+}
+

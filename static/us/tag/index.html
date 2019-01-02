@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="keywords" content="{{tag_title|title}}">
+    <meta name="description" content="{{tag_title|title}} at healthguidewiki.com, these articles are a collections of {{tag_title|title}}, lots of amazing {{tag_title|title}} will help you to solve your any issues.">
+    <title>{{tag_title|title}} – Healthguidewiki.com</title>
+    <link rel="canonical" href="https://www.healthguidewiki.com/tag/{{ tag_title|slugify }}" />
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/product_list.css" rel="stylesheet">
+    <script src="/static/js/lib/vue2.5.js"></script>
+
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121440806-1');
+    </script>
+</head>
+<body>
+<div id="vueContainer" v-cloak>
+    <navigation-bar></navigation-bar>
+    <div id="mainbody" class="container clearfix">
+        <main>
+            <header class="site_menu">
+                <dl class="clearfix">
+                    <dt></dt>
+                    <dd><a href="/">HOME ></a></dd>
+                    <dd class="currentPage">{{tag_title|title}}</dd>
+                </dl>
+            </header>
+
+            {% for item in page_data %}
+            <section class="product_item">
+                <h2 class="article_title"><a href="{{ domain }}{{ item.txt_url }}">{{ item.title }}</a></h2>
+                <!--<div class="pro_lab">
+                    <span class="label_tab">Enter a promo code</span>
+                    <span class="label_book">Add a note</span>
+                </div>-->
+                <div class="detail clearfix">
+                    <div class="pro_img">
+                        <img src="{{ domain }}{{ item.img_url }}" alt="{{ item.title }}" />
+                    </div>
+                    <div class="product_info">
+                        <p>{{ item.introduction }}</p>
+                        <a class="text_success" href="{{ domain }}{{ item.txt_url }}">[Continue Reading...]</a>
+                        <div>
+                            {% for tag in item.tag %}
+                            <a style="display: inline-block;padding:5px;border: 1px solid #ccc;border-radius: 5px;color: #ccc;" href="{{ domain }}/tag/{{ tag.url_key }}">{{ tag.title }}</a>
+                            {% endfor %}
+                        </div>
+                        <div style="margin-top: 5px" class="addthis_inline_share_toolbox"></div>
+                    </div>
+                </div>
+            </section>
+            {% endfor %}
+
+        </main>
+
+        <aside id="aside">
+            <section class="top_prolist">
+                <h2>Popular Articles about {{tag_title|title}}</h2>
+                <ul class="aside_prolist">
+                    {% for item in page_data %}
+                    <li class="clearfix">
+                        <div><img src="{{ domain }}{{ item.img_url }}" alt="{{ item.title }}"/></div>
+                        <p><a href="{{ domain }}{{ item.txt_url }}">{{ item.title }}</a></p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="good_hot" v-if="hotpro">
+                <h2>Bestseller Products for {{tag_title|title}}</h2>
+                <div>
+                    <a :href="hotpro.pageUrl">
+                        <img :src="hotpro.imgUrl" :alt="hotpro.title">
+                        <button class="good_hot_btn" :style="hotpro.btnPos">Learn More</button>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h2>Categories</h2>
+                <ul class="aside_lab clearfix">
+                    <li v-for="item in hot_word"><a :href="item.url">[[item.name]]</a></li>
+                    <li><a :href="urlPageBase+'products/easy-lean'">EASY LEAN</a></li>
+                    <li><a :href="urlPageBase+'products/top-gun'">TOP GUN Drops</a></li>
+                    <li><a :href="urlPageBase+'products/simple-young'">SIMPLE YOUNG</a></li>
+                    <li><a :href="urlPageBase+'products/novaricose'">NOVARICOSE</a></li>
+                </ul>
+            </section>
+            <section>
+                <h3>Popular Search for {{tag_title|title}}</h3>
+                <ul class="aside_lab clearfix">
+                    {% for tag in tag_list|slice:":10" %}
+                    <li><a href="{{ domain }}/tag/{{ tag.url_key }}">{{ tag.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </aside>
+    </div>
+    <footer-nav></footer-nav>
+</div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b6c0f0c11c2d905"></script>
+<script src="/static/js/lib/jquery2.2.3.js"></script>
+<script src="/static/js/PC/english/config/Basicinformation.js"></script>
+<script src="/static/js/PC/english/component.js"></script>
+<script src="/static/js/PC/english/product_list.js"></script>
+<script>
+    $(function(){
+        var controller;
+        if(!controller)
+            controller = new ProductList();
+        controller.init()
+    })
+</script>
+</body>
+</html>

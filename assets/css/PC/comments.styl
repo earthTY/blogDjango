@@ -1,0 +1,106 @@
+
+.comments{
+  .userinfo{
+    padding 10px 0
+    font-size $font-big
+    position relative
+
+    i{
+      width 28px
+      height 28px
+      background:url("../../img/PC/user.png")
+      display inline-block
+      position absolute
+      transform translate(-100%,-50%)
+      top 50%
+      margin-left -5px
+    }
+  }
+  .star{
+    color: $solid-gray
+    .icon-wujiaoxing{
+      font-size 30px
+    }
+  }
+  .commit_star{
+
+  }
+}
+.commit_comments{
+  padding 0 39px 25px 54px
+  border-top 1px solid $solid-gray
+
+  h2{
+    padding-top 40px
+    font-size 36px
+    font-weight bold
+    color #5D595A
+  }
+
+  p{
+    font-size 20px
+    line-height 1.5
+    padding-top 5px
+    padding-bottom 15px
+    color: #5d595a;
+  }
+
+  textarea{
+    width 100%
+    height 168px
+    resize none
+    background-color: $solid-gray
+    border none
+    outline none
+    font-size $font-normal
+    padding 15px
+
+    box-shadow inset 1px 1px 3px #777
+  }
+  &>div:not(.commit_star)  {
+    label{
+      font-size: 24px;
+      padding: 10px 0 5px;
+      display: block;
+    }
+    input{
+      width 100%
+      height 60px
+      background-color: $solid-gray
+      border none
+      outline none
+      font-size $font-normal
+      padding 0 15px
+
+      box-shadow inset 1px 1px 3px #777
+    }
+  }
+}
+.user_comments{
+  border-top 1px solid $solid-gray
+  padding 0 39px 25px 54px
+  h4{
+    font-size $font-normal
+    font-weight bolder
+    padding-top  10px
+    margin-left -33px
+  }
+  dt,dd{
+    float left
+  }
+  dd{
+    margin-left 10px
+  }
+  .star{
+    line-height 46px
+  }
+  &>div{
+    margin-bottom 10px
+    p{
+      padding 17px 15px
+      font-size $font-normal
+      background-color: $solid-gray
+      line-height 1.5
+    }
+  }
+}

@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="keywords" content="Contact Us, Healthguidewiki">
+    <meta name="description" content="Please feel free to contact us if you have any question about health, weight loss, beauty or our products at Healthguidewiki.com.">
+    <title>Contact Us - Healthguidewiki.com</title>
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/contact_us.css" rel="stylesheet">
+
+
+    <script src="/static/js/lib/vue2.5.js"></script>
+    <script src="/static/js/lib/jquery2.2.3.js"></script>
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-121440806-1');
+</script>
+</head>
+<body>
+    <div id="vueContainer" v-cloak>
+        {% include "./include/navigation.html" %}
+        <div id="mainbody" class="container clearfix">
+            <header class="site_menu">
+                <dl class="clearfix">
+                    <dt></dt>
+                    <dd><a href="/">HOME ></a></dd>
+                    <dd class="currentPage">CONTACT US</dd>
+                </dl>
+            </header>
+            <article>
+                <div class="contact_lan">
+                    <h3>CONTACT US</h3>
+                    <div class="choose_lan">
+                        <h4>Please Select Your Language Version:</h4>
+                        <p>
+                            <a href="/contact-us.html"><span><img src="/static/img/Bitmap_1.png"/>English</span></a>
+                            <a href="/it/contact-us.html"><span><img src="/static/img/Bitmap_3.png"/>Italiano</span></a>
+                            <a href="/es/contact-us.html"><span><img src="/static/img/Bitmap_4.png"/>Español</span></a>
+                        </p>
+                    </div>
+                </div>
+
+                <form class="contact_from">
+                    <h3>Contact</h3>
+                    <p>IF YOU WISH TO CONTACT US USE THE FORM BELOW</p>
+                    <div class="from-group">
+                        <label>Name<span>(Enter your name)</span></label>
+                    </div>
+                    <div class="from-group">
+                        <label>First</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="from-group">
+                        <label>Last</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="from-group">
+                        <label>Your email<span>(enter a valid email address)</span></label>
+                        <input type="email" placeholder="email@example.com"/>
+                    </div>
+                    <div class="from-group">
+                        <label> Message content</label>
+                        <textarea></textarea>
+                    </div>
+                    <div class="clearfix">
+                        <button class="pull-rigth">send</button>
+                    </div>
+                </form>
+            </article>
+        </div>
+        {% include './include/footer.html' %}
+    </div>
+    <script src="/static/js/PC/english/config/Basicinformation.js"></script>
+    <script src="/static/js/PC/english/contact_us.js"></script>
+    <script>
+        $(function(){
+            var controller;
+            if(!controller)
+                controller = new ContactAs();
+            controller.init()
+        })
+    </script>
+</body>
+</html>

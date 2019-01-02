@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% include "./include/head.html" %}
+    <style>
+        .welcome div{
+            background: url("/static/manage/img/bg_b.png");
+            height: 800px;
+        }
+        #page-wrapper{
+            min-height: 940px !important;
+        }
+    </style>
+</head>
+<body>
+<div id="value_container" v-cloak>
+    <div id="wrapper">
+        <view-header></view-header>
+        <view-navigation></view-navigation>
+        <div id="page-wrapper" style="min-height: 1040px;overflow:hidden;">
+            <div id="page-inner">
+                <main class="welcome">
+                    <div class="">
+
+                    </div>
+                    <footer><p>Copyright &copy; 2018 MagicHygeia All rights reserved.</p></footer>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% include "./include/foot.html" %}
+<script src="/static/manage/layer/laydate.js"></script>
+<script src="/static/manage/js/common/welcome.js"></script>
+</html>

@@ -1,0 +1,59 @@
+<div id="view-header">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-brand"  style="font-size: 15px;"><i class="fa fa-comments"></i> <strong>Magic Hygeia</strong></div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a @click="openUserView"><i class="fa fa-user fa-fw"></i> 修改信息</a></li>
+                        <li class="divider"></li>
+                        <li><a @click="exit"><i class="fa fa-sign-out fa-fw"></i> 安全退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="modal fade" id="user_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">个人资料</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名</label>
+                            <input disabled class="form-control" v-model="current_user.username"/>
+                        </div>
+                        <div class="form-group">
+                            <label>原密码</label>
+                            <input class="form-control" type="password" v-model="passwd"/>
+                        </div>
+                        <div class="form-group">
+                            <label>新密码</label>
+                            <input class="form-control" type="password" v-model="newpwd"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" @click="modifyCurrentUserInfo">保存信息</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

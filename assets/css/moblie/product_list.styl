@@ -1,0 +1,52 @@
+@import "reset.styl"
+.product_item{
+  padding-bottom getRem(15)
+  border-bottom 1px solid $bg-color
+
+  h2{
+    font-size $font-normal
+    font-weight 600
+    line-height 1.2
+    padding getRem(15)
+    text-align center
+  }
+
+  .pro_img{
+    margin 0 getRem(20)
+    text-align center
+
+    img{
+      width 100%
+    }
+  }
+  .pro_lab{
+    font-size $font-short
+    font-weight 600
+  }
+  .label_tab{
+    float left
+  }
+  .label_book{
+    float right
+  }
+
+  .product_info{
+    font-size $font-normal
+    line-height 1.5
+
+    p{
+      padding getRem(10) 0
+    }
+  }
+}
+.nextPage{
+  text-align center
+  padding getRem(12) 0
+  a{
+    display inline-block
+    padding getRem(12) getRem(15)
+    background-color: #000
+    border-radius 5px
+    color #fff
+  }
+}

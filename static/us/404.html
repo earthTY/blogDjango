@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=600" />
+    <title></title>
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/PC/404.css">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+
+    <script src="/static/js/lib/vue2.5.js"></script>
+    <script src="/static/js/lib/jquery2.2.3.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121440806-1');
+    </script>
+</head>
+<body>
+    <div id="page" v-cloak>
+        {% include "./include/navigation.html" %}
+        <div class="error">
+           <header>
+               <div><img src="/static/img/PC/404.png" alt=""></div>
+               <h1>404 Error</h1>
+               <p>OOPS. We are sorry about the page you are looking for doesn't exist or has been moved.</p>
+           </header>
+
+           <p>Please check the recommendations below.</p>
+
+            <div class="link-for clearfix">
+                <dl class="pull-left">
+                    <dt class="bolder">CATEGORIES</dt>
+                    <dd v-for="(nav,index) in footernavList">
+                        <a :href="nav.url">[[nav.name]]</a>
+                    </dd>
+                </dl>
+                <dl class="pull-left">
+                    <dt class="bolder">
+                        <a :href="urlPageBase+'products'">PRODUCTS</a>
+                    </dt>
+                    <dd v-for="(nav,index) in productNavList">
+                        <a :href="nav.url">[[nav.name]]</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        {% include './include/footer.html' %}
+    </div>
+</body>
+<script src="/static/js/PC/english/config/Basicinformation.js"></script>
+<script>
+    new Vue({
+        el:"#page",
+        delimiters: ['[[', ']]'],
+        mixins: [mixinsComment],
+    })
+</script>
+</html>

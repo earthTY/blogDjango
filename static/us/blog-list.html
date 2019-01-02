@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=600" />
+    <meta name="keywords" content="Sexual Performance Techniques, Male Penis Enhancement, Penis Enlargement">
+    <meta name="description" content="Boost Adults’ sexual life quality and sexual satisfaction with sexual performance techniques: an unexplored tips & advice ways to male penis enhancement enlargement at healthguidewiki.com.">
+    <title>Sexual Performance Techniques, Male Penis Enhancement Enlargement Tips – Healthguidewiki.com</title>
+    <link rel="canonical" href="https://www.healthguidewiki.com/adults" />
+    <link href="/static/css/iconfont.css" rel="stylesheet">
+    <link href="/static/css/PC/product_list.css" rel="stylesheet">
+    <script src="/static/js/lib/vue2.5.js"></script>
+<script src="/static/js/lib/jquery2.2.3.js"></script>
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121440806-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-121440806-1');
+
+	window.currentPage = {{ current_page }}
+    window.pageCount = {{ page_count }}
+</script>
+</head>
+<body>
+    <div id="vueContainer" v-cloak>
+{#        <navigation-bar></navigation-bar>#}
+
+        {% include "./include/navigation.html" %}
+
+        <div id="mainbody" class="container clearfix">
+            <main>
+                <header class="site_menu">
+                    <dl class="clearfix">
+                        <dt></dt>
+                        <dd><a href="/">HOME ></a></dd>
+                        <dd class="currentPage">{{ menu_name }}</dd>
+                    </dl>
+                </header>
+                {% for article in data_list %}
+                    <section class="product_item">
+                        <h2 class="article_title"><a>{{ article.title }}</a></h2>
+                        <div class="detail clearfix">
+                            <div class="pro_img">
+                                <img src="{{ article.img_url }}" alt="{{ article.title }}" />
+                            </div>
+                            <div class="product_info">
+                                <p>{{ article.introduction }}</p>
+                                {% if article.is_product %}
+                                    <a class="text_success" href="products/{{ article.url_title }}">[Continue Reading...]</a>
+                                {% else %}
+                                    <a class="text_success" href="articles/{{ article.url_title }}">[Continue Reading...]</a>
+                                {% endif %}
+                                <div>
+                                    {% for tag in article.tags_list %}
+                                        <a style="display: inline-block;padding:5px;border: 1px solid #ccc;border-radius: 5px;color: #ccc;" href="{{ domain }}/tag/{{ tag.tag_url }}">{{ tag.tag_name }}</a>
+                                    {% endfor %}
+                                </div>
+                                <div style="margin-top: 5px" class="addthis_inline_share_toolbox"></div>
+                            </div>
+                        </div>
+                    </section>
+                {% endfor %}
+                <div class="pageCenter" v-if="productList.length>8">
+                    <a class="prev">< Pre</a>
+                    <!--:class="{ disabled : (start_count/page_num + 1 == 1) }" @click="OnPrePage"></a>-->
+                    <ul class="pageList">
+                        <li class="active">1</li>
+                    </ul>
+                    <a class="next">Next ></a>
+
+                    <div class="goTo">
+                        <input type="text" @keyup.enter="goToPage($event,Math.ceil(productList.length/8))"/>
+                        <span>Total [[pageCount]]</span>
+                    </div>
+                </div>
+            </main>
+{#            <v-aside :basepro="basepro" :hotpro="hotpro" :hot_word="hot_word" menuname="Adults" bestproduct="TOP GUN Drops"></v-aside>#}
+            {% include './include/aside.html' %}
+        </div>
+{#        <footer-nav></footer-nav>#}
+        {% include './include/footer.html' %}
+    </div>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b6c0f0c11c2d905"></script>
+    <script src="/static/js/PC/english/config/Basicinformation.js"></script>
+    <script src="/static/js/PC/english/product_list.js"></script>
+    <script>
+        $(function(){
+            var controller;
+            if(!controller)
+                controller = new ProductList();
+            controller.init()
+        })
+    </script>
+</body>
+</html>

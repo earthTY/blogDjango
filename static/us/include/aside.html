@@ -1,0 +1,51 @@
+<aside id="aside">
+    <section class="top_prolist">
+        {% if is_product %}
+            <h2>Rated Products</h2>
+        {% else %}
+            <h2>Popular Articles about {{ categories_info.menu }}</h2>
+        {% endif %}
+
+
+        <ul class="aside_prolist">
+            {% for blog_pro in favorite_articles %}
+            <li class="clearfix">
+                <div><img src="{{ blog_pro.img_url }}" alt="{{ blog_pro.title }}"/></div>
+                <p><a href="https://www.healthguidewiki.com/article/{{ blog_pro.url_title }}">{{ blog_pro.title }}</a></p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="good_hot" v-if="hotpro">
+        {% if is_product %}
+            <h2>Bestseller Products</h2>
+        {% else %}
+            <h2>Bestseller Products for {{ categories_info.menu }}</h2>
+        {% endif %}
+
+        <div>
+            <a href="https://www.healthguidewiki.com/articles/{{ blog_pro.url_title }}">
+                <img src="{{ blog_pro.img_url }}" alt="{{ blog_pro.title }}"/>
+                <button class="good_hot_btn" :style="hotpro.btnPos">Learn More</button>
+            </a>
+        </div>
+    </section>
+    <section>
+        <h2>Categories</h2>
+        <ul class="aside_lab clearfix">
+            <li v-for="item in hot_word"><a :href="item.url">[[item.name]]</a></li>
+            <li><a :href="urlPageBase+'products/easy-lean'">EASY LEAN</a></li>
+            <li><a :href="urlPageBase+'products/top-gun'">TOP GUN Drops</a></li>
+            <li><a :href="urlPageBase+'products/simple-young'">SIMPLE YOUNG</a></li>
+            <li><a :href="urlPageBase+'products/novaricose'">NOVARICOSE</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Popular Search for</h3>
+        <ul class="aside_lab clearfix">
+            {% for tag in new_tags %}
+            <li><a href="https://www.healthguidewiki.com/tag/{{ tag.tag_url }}">{{ tag.tag_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+</aside>

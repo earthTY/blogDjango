@@ -1,0 +1,43 @@
+<div id="comments" class="comments">
+    <div class="commit_comments">
+        <h2>LEAVE A REPLY</h2>
+        <p>Your email address will not be published. Required fields are marked *</p>
+        <h3 class="userinfo"><i></i>Cynthia</h3>
+        <div class="star commit_star">
+            <strong class="iconfont icon-wujiaoxing"></strong>
+            <strong class="iconfont icon-wujiaoxing"></strong>
+            <strong class="iconfont icon-wujiaoxing"></strong>
+            <strong class="iconfont icon-wujiaoxing"></strong>
+            <strong class="iconfont icon-wujiaoxing"></strong>
+        </div>
+
+        <div>
+            <label>Comment</label>
+            <textarea v-model="inputComments.comment"></textarea>
+        </div>
+
+        <div>
+            <label>Name * </label>
+            <input v-model="inputComments.name" />
+        </div>
+
+        <div>
+            <label>Email * </label>
+            <input v-model="inputComments.email" />
+        </div>
+
+        <a class="btn_a" href="javascript:;" @click="addComments">POST COMMENTS</a>
+    </div>
+    <div class="user_comments" v-if="usercomments.length>0">
+        <h4>Comments</h4>
+        <div v-for="item in usercomments">
+            <dl class="clearfix">
+                <dt class="userinfo"><i></i>[[item.name]]</dt>
+                <dd class="star">
+                    <strong class="iconfont icon-wujiaoxing" :class="{text_success:(i<=item.star)}" v-for="i in [1,2,3,4,5]"></strong>
+                </dd>
+            </dl>
+            <p>[[item.remark]]</p>
+        </div>
+    </div>
+</div>

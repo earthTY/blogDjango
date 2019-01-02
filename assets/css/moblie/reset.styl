@@ -1,0 +1,441 @@
+@import '../lib/normalize.styl'
+@import '../lib/vendor.styl'
+
+global-reset()
+
+$html-size = 26.75
+
+getRem(length)
+  return (length/$html-size)rem
+
+$font-short = getRem(18)
+$font-normal = getRem(22)
+$font-big = getRem(24)
+$font-bigs = getRem(28)
+$font-superbig = getRem(40)
+
+$font-color = #FF6699
+$font-green = #66CCCC
+
+$bg-color = #E7E7E7
+$solid-gray = #D6D3D3
+
+.text_info{
+  color $font-color
+}
+.text_success{
+  color $font-green
+}
+
+strong{
+  font-weight bolder
+}
+
+
+
+
+/*�����ж���Ļ��ȶ���������С rem*/
+html{font-size:19.5px}
+html,body{
+  height 100%
+}
+@media only screen and (min-width:375px){
+  html{font-size: 20px !important;}
+}
+@media only screen and (min-width:401px){
+  html{font-size:25px !important;}
+}
+@media only screen and (min-width:428px){
+  html{font-size:($html-size)px !important;}
+}
+@media only screen and (min-width:481px){
+  html{font-size:30px !important;}
+}
+@media only screen and (min-width:569px){
+  html{font-size:35px !important;}
+}
+@media only screen and (min-width:641px){
+  html{font-size:40px !important;}
+}
+
+[v-cloak]{
+  display none
+}
+
+#vueContainer{
+  max-width 768px
+  margin 0 auto
+}
+
+
+.container{
+  padding 0 getRem(15)
+  overflow hidden
+}
+
+
+a{
+  color #000
+  text-decoration none !important
+}
+a.btn_a{
+  font-size $font-short
+  display block
+  width getRem(145)
+  height getRem(38)
+  text-align center
+  line-height getRem(38)
+  background-color: #000
+  margin getRem(30) auto 0
+  color #fff
+  position relative
+  z-index 10
+}
+a.btn_a::before{
+  content ""
+  width 85%
+  position absolute
+  bottom 0
+  height 20%
+  border-radius 100%
+  box-shadow 0 0 getRem(10) getRem(5) #000
+  z-index -10
+  left 50%
+  transform translateX(-50%)
+}
+
+//��ǩ��Ϣ
+.label_tab,.label_book{
+  display inline-block
+  padding getRem(20) 0 getRem(20) 40px
+  font-size $font-short
+  position relative
+}
+.label_tab::after,
+.label_book::after {
+  content ""
+  position absolute;
+  background url("../../img/PC/icon.png")
+  left 5px
+  top 50%
+  transform translateY(-50%)
+}
+.label_tab::after {
+  width: 31px;
+  height: 25px;
+  background-position: -24px -0px;
+}
+.label_book::after{
+  width: 24px;
+  height: 27px;
+  background-position: -0px -0px;
+}
+
+.clearfix {
+  zoom 1
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.pull-left{
+  float left
+}
+.pull-rigth{
+  float right
+}
+
+.text_success{
+  color $font-green
+}
+.text_info{
+  color $font-color
+}
+
+#header{
+  width 100%
+  position relative
+  z-index 1000
+
+  .container{
+    background-color: #fff
+  }
+
+  .headerwarp{
+    z-index 1000
+    position fixed
+    width 100%
+    max-width 768px
+    height getRem(55)
+    padding 0 getRem(10)
+    background-color: #fff
+    box-shadow: 0px 2px 2px 1px rgba(163, 157, 157, 0.5);
+  }
+
+
+  .logo{
+    padding-top getRem(55)
+    text-align center
+    background #ffffff
+    img{
+      display block
+      padding getRem(12) 0
+      margin 0 auto
+    }
+  }
+
+  .login{
+    font-size $font-short
+    color #898989
+    line-height getRem(55)
+    position absolute
+    transform translateX(-100%)
+    margin-left getRem(-35)
+    display none
+
+    a{
+      color #898989 !important
+    }
+    span{
+      margin 0 getRem(5)
+    }
+  }
+
+  .menu{
+    height 100%
+
+    .nav-icon{
+      height getRem(55)
+      &>i{
+        width getRem(28)
+        height getRem(28)
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        background url("../../img/mobile/icon_list_a.png") no-repeat center
+      }
+    }
+
+    .drop_group{
+      position fixed
+      display none
+      padding-right getRem(54)
+      font-size $font-normal
+      background-color: rgba(0, 0, 0, 0.75)
+      top 0
+      left 0
+      width 100%
+      height 100%
+      z-index 1000
+
+      .close{
+        position absolute
+        right getRem(5)
+        top getRem(5)
+        width getRem(37)
+        height getRem(37)
+        background url("../../img/mobile/close.png") no-repeat center
+        background-size: contain;
+      }
+
+
+
+      .menu_box{
+        background #ffffff
+        height 100%
+
+        .logo{
+          display flex
+          justify-content center
+          align-items center
+          height getRem(120)
+          padding 0
+          border-bottom:1px solid #CFCECE
+        }
+
+
+
+        ul{
+          padding-left getRem(28)
+        }
+
+        .firstMenu{
+          padding getRem(15) 0
+
+          &>p{
+            position relative
+            cursor pointer
+
+            span{
+              position absolute
+              right 1rem
+
+              .iconfont{
+                display block
+                transition all 0.2s
+                transform rotate(-90deg)
+              }
+              .iconfont.active{
+                transform rotate(0deg)
+              }
+            }
+          }
+
+          /*&>a:first-child
+          &>a:first-child*/
+
+          .dropDown{
+            padding-top getRem(10)
+            display none
+          }
+
+          .dropDown li{
+            padding getRem(15) getRem(8)
+          }
+          .dropDown li:last-child{
+            padding-bottom  0
+          }
+        }
+      }
+    }
+  }
+
+  .language{
+    font-size $font-short
+    color #fff
+    a{
+      color #fff
+    }
+    .currentLan{
+      position absolute
+      top 50%
+      right getRem(10)
+      transform translateY(-50%)
+      white-space nowrap
+      line-height getRem(20)
+      color #000
+      display flex
+      align-items center
+      font-size $font-short
+
+      .iconfont{
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        margin-left -(getRem(20))
+        transition all 0.2s
+      }
+
+      .iconfont.active{
+        transform translateY(-50%) rotate(-180deg)
+      }
+
+
+      img{
+        margin 0 getRem(10)
+      }
+    }
+    .dropDown{
+      position absolute
+      display none
+      font-size $font-normal
+      background-color: rgba(0, 0, 0, 0.75)
+      width 100%
+      left 0
+      top 100%
+      z-index 1000
+
+      .lan_box{
+        display inline-block
+        position relative
+        left 50%
+        transform translateX(-50%)
+
+        p{
+          padding getRem(15)
+          color: #fff
+          display flex
+          align-items center
+
+          span{
+            margin-left getRem(15)
+          }
+        }
+      }
+    }
+  }
+}
+
+#site_menu{
+  font-size $font-normal
+  font-weight 600
+  padding 0 getRem(12)
+  border-bottom 1px solid $font-color
+  border-top 1px solid $font-color
+
+  dt,dd{
+    float left
+    margin-right getRem(5)
+  }
+  dd{
+    padding getRem(10) 0
+    line-height 1.5
+  }
+  dd.text_info{
+    font-weight normal
+  }
+}
+
+
+#footer{
+  background #ffffff
+  .copyright{
+    padding getRem(15) 0
+    text-align center
+    font-weight 700
+    font-size $font-short
+  }
+}
+
+.top_comments{
+  text-align center
+  font-size $font-normal
+  position fixed
+  z-index: 100;
+  right getRem(15)
+  bottom getRem(120)
+
+  &>div{
+    color #ffffff
+    width getRem(45)
+    height getRem(45)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius 5px
+  }
+  .go_top{
+    background-color: rgba(0,0,0,1)
+
+    i{
+      transform rotateX(180deg)
+    }
+  }
+  .add_comments{
+    margin-top getRem(15)
+    background-color: rgba(0, 0, 0, 0.75)
+  }
+
+  i{
+    font-size getRem(20)
+  }
+}
+

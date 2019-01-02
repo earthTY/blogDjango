@@ -1,0 +1,143 @@
+#comments{
+  font-size $font-normal
+  padding-bottom getRem(15)
+  .comments_star i,.userinfo i{
+    display inline-block
+    width 28px
+    height 28px
+    background url("../../img/user.png") no-repeat center
+    margin-right getRem(5)
+  }
+    
+  h4{
+    font-size getRem(20)
+    text-align center
+    font-weight 700
+    padding getRem(25) 0 getRem(10)
+    border-bottom 1px solid #000000
+  }
+
+  .star{
+    padding-left getRem(35)
+    color: $solid-gray
+    display flex
+    .icon-wujiaoxing{
+      font-size 30px
+      margin 0 getRem(2)
+    }
+  }
+  .comments_star{
+    font-size $font-normal
+    padding getRem(15) 0
+
+    .userinfo{
+      display flex
+      align-items center
+    }
+  }
+
+  p{
+    padding getRem(10)
+    background-color $bg-color
+    line-height 1.5
+  }
+}
+
+#user_commit_comments{
+  display none
+  position fixed
+  z-index 9999
+  background-color: rgba(0, 0, 0, 0.75)
+  width 100%
+  height 100%
+  top 0
+  left 0
+  overflow hidden
+  padding getRem(15)
+
+  .userinfo{
+    padding-top getRem(10)
+  }
+  .commit_star{
+    padding 0 getRem(30)
+  }
+
+  .layer-group{
+    border-radius 5px
+    overflow hidden
+    background-color: #fff
+    header{
+      padding getRem(15) 0
+      text-align center
+      color #fff
+      background-color: $font-green
+      border-radius 5px
+    }
+    .commit_comments{
+      padding getRem(15)
+
+      h2{
+        font-size $font-big
+        font-weight bold
+        padding-bottom getRem(15)
+      }
+
+      p{
+        background-color: transparent
+        color #8C8A8A
+        padding 0
+      }
+      .userinfo{
+        color #000
+        display flex
+        align-items center
+      }
+
+      & div{
+        label{
+          display block
+          font-size $font-normal
+          padding getRem(15) 0 getRem(10)
+        }
+        input{
+          width 100%
+          border none
+          outline none
+          background-color: $bg-color
+          height getRem(50)
+          padding 0 getRem(15)
+        }
+      }
+
+      textarea{
+        width 100%
+        resize none
+        height getRem(150)
+        border none
+        background-color: $bg-color
+        font-size $font-normal
+        padding getRem(15)
+        outline none
+      }
+    }
+
+
+    footer{
+      display flex
+      justify-content space-between
+      padding-top getRem(15)
+
+      a{
+        display inline-block
+        padding getRem(15) getRem(10)
+        border-radius 5px
+        background: #000
+        color #ffffff
+        text-align center
+      }
+      .cancel{
+        background-color: $bg-color
+      }
+    }
+  }
+}
