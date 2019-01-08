@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'blogDjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogDjango',
+        'NAME': 'blogdjango',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD':'123456',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -128,3 +128,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'assets'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

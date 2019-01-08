@@ -18,11 +18,25 @@ from django.conf.urls import url
 from django.contrib import admin
 from blog import views
 from blog.admin_system import manager_view
+from django.conf.urls.static import static
+from django.conf import settings
 
-urlpatterns = [
+urlpatterns = []
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    url(r'^upload_img$',manager_view.upload_img),
+
+    url(r'^upload_img_edit',manager_view.upload_img_edit),
+
     url(r'^manager/(?P<page>[^/]*)$', manager_view.manager_view, name='manager'),
 
     url(r'^manager/(?P<page>[^/]*)/(?P<sp>[^/]*)$', manager_view.managerS_view, name='managerS_view'),
+
+    url(r'^bs/get_tags_by_lang$',manager_view.get_tags_by_lang),
+
+    url(r'^bs/get_menu_products$',manager_view.get_menu_products),
 
     url(r'^bs/get_menu_by_lang$',manager_view.get_menu_by_lang),
 

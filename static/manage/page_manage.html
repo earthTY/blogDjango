@@ -76,7 +76,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     页面列表
-                                    <a class="btn btn-success" @click="openPageOnlineView"
+                                    <a class="btn btn-success" @click="openBlogOnlineView"
                                        style="float: right">页面上新</a>
                                 </div>
                                 <div class="panel-heading">
@@ -102,7 +102,7 @@
                                         </div>
                                         <button class="btn btn-info" type="button" @click="Search(true,0)">搜索</button>
                                     </form>
-                                    <form style="border-radius:5px;border:1px dashed rgb(194, 194, 194);padding: 10px;margin-top: 20px" class="form-inline">
+                                    {% comment %}<form style="border-radius:5px;border:1px dashed rgb(194, 194, 194);padding: 10px;margin-top: 20px" class="form-inline">
                                         <div class="form-group">
                                             <label>产品编号</label>
                                             <div  style="display: inline-block;width: 200px">
@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
                                         <button class="btn btn-info" type="button" @click="Search(true,1)">搜索</button>
-                                    </form>
+                                    </form>{% endcomment %}
                                 </div>
                                 <div class="panel-body">
                                     <div class="">
@@ -133,7 +133,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr class="gradeA odd" v-for="(item,index) in online_page_list">
+                                                    {% comment %}<tr class="gradeA odd" v-for="(item,index) in online_page_list">
                                                         <td class="sorting_1">[[item.No]]</td>
                                                         <td class=" ">[[item.product_number]]</td>
                                                         <td class=" ">[[item.item_bar]]</td>
@@ -160,7 +160,7 @@
                                                             <a v-if="item.status == 1" @click="pagePublishOrStop(item,0,index)" style="cursor: pointer;">取消发布</a>
                                                             <a v-if="item.status != 2" @click="pagePublishOrStop(item,2,index)" style="cursor: pointer;">下架</a>
                                                         </td>
-                                                    </tr>
+                                                    </tr>{% endcomment %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -184,7 +184,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            {% comment %}<div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="dataTables_paginate paging_simple_numbers"
                                                          id="dataTables-example_paginate" style="text-align: center;">
@@ -203,7 +203,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>{% endcomment %}
                                         </div>
                                     </div>
 
@@ -212,124 +212,101 @@
                             <!--End Advanced Tables -->
                         </div>
                     </div>
-                    <div class="modal fade" id="page_online" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    <div class="modal fade" id="blog_online" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog  modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">页面上新</h4>
+                                    <h4 class="modal-title" id="myModalLabel">博客上新</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form role="form">
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>链接名称</label>
-                                                    <i-input class="" v-model.trim="page_online.name"
-                                                           placeholder="必填，链接名称"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>产品编号</label>
-                                                    <i-input class="" v-model.trim="page_online.product_number"
-                                                           placeholder="编号范围:ecsp1002000 ~ ecsp1003000"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>页面标题</label>
-                                                    <i-input class="" v-model.trim="page_online.title"
-                                                           placeholder="必填，页面标题"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>产品名称</label>
-                                                    <i-input class="" v-model.trim="page_online.item_bar"
-                                                           placeholder="必填，产品名称"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>折扣标语</label>
-                                                    <i-input class="" v-model.trim="page_online.discount"
-                                                           placeholder="两件7折,三件5折"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>原价</label>
-                                                    <i-input class="" v-model.trim="page_online.price_old"
-                                                           placeholder="必填，原价 - 1098"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>促销价</label>
-                                                    <i-input class="" v-model.trim="page_online.price_now"
-                                                           placeholder="必填，促销价 - 799"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>两件折扣</label>
-                                                    <i-input class="" type="number" step="0.05" max="1" min="0" v-model.trim="page_online.discount_2_price_code"
-                                                           placeholder="必填，两件折扣 - 0.75"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>三件以上折扣</label>
-                                                    <i-input class="" type="number" step="0.05" max="1" min="0" v-model.trim="page_online.discount_3_price_code"
-                                                           placeholder="必填，三件以上折扣 - 0.5"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <!--banner图-->
                                         <div class="form-group">
-                                            <label>页面banner图</label>
+                                            <label>请选择添加类型</label>
                                             <div>
-                                                <draggable v-model="page_online.banner_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                     v-for="(item,index in page_online.banner_info.imgList">
-                                                    <template v-if="item.status === 'finished'">
-                                                        <img :src="item.url">
-                                                        <div class="demo-upload-list-cover">
+                                                <label><input v-model="blog_online.type" value="0" type="radio"> 博客页面</label>
+                                                <label><input v-model="blog_online.type" value="1" type="radio"> 产品页面</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" :key="blog_online.type">
+                                            <label>请选择博客目录</label>
+                                            <i-select v-model="blog_online.menu_id" @on-change="getMenuProduct(blog_online.menu_id)">
+                                                <i-option v-for="val in blog_menu_list" :value="val.id">[[val.menu]]</i-option>
+                                            </i-select>
+                                        </div>
+
+                                        <Row v-if="blog_online.type == 0" type="flex" justify="space-between">
+                                            <i-col span="7">
+                                                <div class="form-group">
+                                                    <label>请输入博客名称</label>
+                                                    <i-input class="" v-model.trim="blog_online.blog_title"></i-input>
+                                                </div>
+                                            </i-col>
+                                            <i-col span="7">
+                                                <div class="form-group">
+                                                    <label>页面关键词</label>
+                                                    <i-input class="" v-model.trim="blog_online.keywords"></i-input>
+                                                </div>
+                                            </i-col>
+                                            <i-col span="7">
+                                                <div class="form-group">
+                                                    <label>对应产品</label>
+                                                    <i-select v-model="blog_online.product_id">
+                                                        <i-option v-for="val in menu_products" :value="val.id">[[val.title]]</i-option>
+                                                    </i-select>
+                                                </div>
+                                            </i-col>
+                                        </Row>
+
+                                        <Row v-else type="flex" justify="space-between">
+                                            <i-col span="11">
+                                                <div class="form-group">
+                                                    <label>请输入博客名称</label>
+                                                    <i-input class="" v-model.trim="blog_online.blog_title"></i-input>
+                                                </div>
+                                            </i-col>
+                                            <i-col span="11">
+                                                <div class="form-group">
+                                                    <label>页面关键词</label>
+                                                    <i-input class="" v-model.trim="blog_online.keywords"></i-input>
+                                                </div>
+                                            </i-col>
+                                        </Row>
+
+                                        <div class="form-group">
+                                            <label>请输入文章预览</label>
+                                            <i-input class="" v-model.trim="blog_online.introduction"></i-input>
+                                        </div>
+
+                                        <!--页面主图-->
+                                        <div class="form-group">
+                                            <label>页面主图</label>
+                                            <Row  type="flex" justify="space-between">
+                                                <i-col span="18">
+                                                    <div class="demo-upload-list">
+                                                    <template v-if="blog_online.img_info.status == true">
+                                                        <img :src="blog_online.img_info.url">
+                                                        {% comment %}<div class="demo-upload-list-cover">
                                                             <Icon v-show="index != 0" type="android-arrow-up"
                                                                   @click.native="prevImgPos(true,'banner_info',index)"></Icon>
                                                             <Icon type="ios-trash-outline"
                                                                   @click.native="handleRemoveBanner(index)"></Icon>
                                                             <Icon v-show="index != (page_online.banner_info.imgList.length - 1)" type="android-arrow-down"
                                                                   @click.native="nextImgPos(true,'banner_info',index)"></Icon>
-                                                        </div>
-                                                    </template>
-                                                    <template v-else>
-                                                        <Progress v-if="item.showProgress" :percent="item.percentage"
-                                                                  hide-info></Progress>
+                                                        </div>{% endcomment %}
                                                     </template>
                                                 </div>
-                                                </draggable>
-                                                <div>
-
+                                                </i-col>
+                                                <i-col span="3">
+                                                    <div>
                                                     <Row>
                                                         <i-col :sm="4">
                                                             <Upload
                                                                     :show-upload-list="false"
-                                                                    :on-success="handleSuccessBanner"
+                                                                    :on-success="handleSuccessBlogImg"
                                                                     :format="['jpg','jpeg','png','gif']"
                                                                     :max-size="2048"
                                                                     multiple
@@ -337,565 +314,47 @@
                                                                 <i-button>本地上传</i-button>
                                                             </Upload>
                                                         </i-col>
-                                                        <i-col :sm="12">
+                                                        {% comment %}<i-col :sm="12">
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control">
                                                                 <span class="input-group-addon" @click="handleGetUrlImage($event,'banner')">外链图片</span>
                                                             </div>
-                                                        </i-col>
+                                                        </i-col>{% endcomment %}
                                                     </Row>
 
                                                 </div>
-                                            </div>
+                                                </i-col>
+                                            </Row>
                                         </div>
 
-                                        <!--详情图-->
-                                        <div class="form-group">
-                                            <label>页面详情图</label>
-                                            <div>
-                                                <draggable v-model="page_online.detail_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                     v-for="(item,index) in page_online.detail_info.imgList">
-                                                    <template v-if="item.status === 'finished'">
-                                                        <img :src="item.url">
-                                                        <div class="demo-upload-list-cover">
-                                                            <Icon v-show="index != 0" type="android-arrow-up"
-                                                                  @click.native="prevImgPos(true,'detail_info',index)"></Icon>
-                                                            <Icon type="ios-trash-outline"
-                                                                  @click.native="handleRemoveDetail(index)"></Icon>
-                                                            <Icon v-show="index != (page_online.detail_info.imgList.length - 1)" type="android-arrow-down"
-                                                                  @click.native="nextImgPos(true,'detail_info',index)"></Icon>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                                </draggable>
-                                                <div>
-
-                                                    <Row>
-                                                        <i-col :sm='4'>
-                                                            <Upload
-                                                                    :show-upload-list="false"
-                                                                    :on-success="handleSuccessDetail"
-                                                                    :format="['jpg','jpeg','png','gif']"
-                                                                    :max-size="2048"
-                                                                    action="/upload_img">
-                                                                <i-button>本地上传</i-button>
-                                                            </Upload>
-                                                        </i-col>
-                                                        <i-col :sm="12">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control">
-                                                                <span class="input-group-addon" @click="handleGetUrlImage($event,'detail')">外链图片</span>
-                                                            </div>
-                                                        </i-col>
-                                                    </Row>
-
-                                                </div>
-                                            </div>
+                                        <div class="form-group" v-show="blog_online.type == 0">
+                                            <textarea id="rich_text"></textarea>
                                         </div>
 
-                                        <!--参数图-->
                                         <div class="form-group">
-                                            <label>页面参数图</label>
-                                            <div>
-                                                <draggable v-model="page_online.parameter_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                     v-for="(item,index) in page_online.parameter_info.imgList">
-                                                    <template v-if="item.status === 'finished'">
-                                                        <img :src="item.url">
-                                                        <div class="demo-upload-list-cover">
-                                                            <Icon v-show="index != 0" type="android-arrow-up"
-                                                                  @click.native="prevImgPos(true,'parameter_info',index)"></Icon>
-                                                            <Icon type="ios-trash-outline"
-                                                                  @click.native="handleRemoveParameter(index)"></Icon>
-                                                            <Icon v-show="index != (page_online.parameter_info.imgList.length - 1)" type="android-arrow-down"
-                                                                  @click.native="nextImgPos(true,'parameter_info',index)"></Icon>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                                </draggable>
-                                                <div>
-                                                    <Row>
-                                                        <i-col :sm='4'>
-                                                            <Upload
-                                                                    :show-upload-list="false"
-                                                                    :on-success="handleSuccessParameter"
-                                                                    :format="['jpg','jpeg','png','gif']"
-                                                                    :max-size="2048"
-                                                                    action="/upload_img">
-                                                                <i-button>本地上传</i-button>
-                                                            </Upload>
-                                                        </i-col>
-                                                        <i-col :sm="12">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control">
-                                                                <span class="input-group-addon" @click="handleGetUrlImage($event,'parameter')">外链图片</span>
-                                                            </div>
-                                                        </i-col>
-                                                    </Row>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--评论信息-->
-                                        <div class="form-group">
-                                            <div>
-                                                <label>评论信息</label>
-                                            </div>
-
-                                            <div v-for="(item,detailPos) in page_online.comments_info"
-                                                 style="padding: 10px;margin-top:10px;border:1px dashed #c2c2c2;border-radius: 5px">
-
-                                                <Row type="flex" justify="space-between">
-                                                    <i-col span="9">
-                                                        <label>用户名</label>
-                                                        <i-input v-model.trim="item.user_name" type="text"
-                                                                 placeholder="Enter something..."></i-input>
-                                                    </i-col>
-                                                    <i-col span="9">
-                                                        <label>评论信息</label>
-                                                        <i-input v-model.trim="item.user_comment" type="text"
-                                                                 placeholder="Enter something..."></i-input>
-                                                    </i-col>
-                                                    <i-col span="4">
-                                                        <label>好评分数</label>
-                                                        <div>
-                                                            <label><input type="radio" v-model.trim="item.is_best" :value="true"/> 五星</label>
-                                                            <label><input type="radio" v-model.trim="item.is_best" :value="false"/> 四星半</label>
-                                                        </div>
-                                                    </i-col>
-                                                </Row>
-                                                <div style="margin-top: 10px;">
-
-                                                    <!--<label>图片名称</label>-->
-                                                    <!--<i-input v-model="line.img_title" type="text"></i-input>-->
-                                                    <draggable v-model="item.imgList" @start="drag=true" @end="drag=false">
-                                                        <div style="margin-top: 10px;" class="demo-upload-list"
-                                                         v-for="(objImg,imgPos) in item.imgList">
-                                                        <template v-if="objImg.status === 'finished'">
-                                                            <img :src="objImg.url">
-                                                            <div class="demo-upload-list-cover">
-                                                                <Icon v-show="imgPos != 0" type="android-arrow-up"
-                                                                      @click.native="prevImgPos(true,'comments_info',imgPos,detailPos)"></Icon>
-                                                                <Icon type="ios-trash-outline"
-                                                                      @click.native="handleRemoveIntroduction(detailPos,imgPos,detailPos)"></Icon>
-                                                                <Icon v-show="imgPos != (item.imgList.length - 1)" type="android-arrow-down"
-                                                                      @click.native="nextImgPos(true,'comments_info',imgPos,detailPos)"></Icon>
-                                                            </div>
-                                                        </template>
-                                                    </div>
-                                                    </draggable>
-                                                    <div style="margin-top: 10px;">
-                                                        <Row>
-                                                            <i-col :sm="4">
-                                                                <Upload
-                                                                        :show-upload-list="false"
-                                                                        :on-success="handleSuccessIntroduction"
-                                                                        :format="['jpg','jpeg','png','gif']"
-                                                                        :max-size="2048"
-                                                                        multiple
-                                                                        action="/upload_img">
-                                                                    <i-button @click="page_online.commentPos = detailPos">本地上传
-                                                                    </i-button>
-                                                                </Upload>
-                                                            </i-col>
-                                                            <i-col :sm="12">
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control">
-                                                                    <span class="input-group-addon" @click="handleGetUrlImage($event,'introduction',detailPos)">外链图片</span>
-                                                                </div>
-                                                            </i-col>
-                                                            <i-col :sm="{span:4,offset:1}">
-                                                                <i-button @click="modifyCommentsInfoList('add',false,detailPos)">删除</i-button>
-                                                            </i-col>
-                                                        </Row>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div style="display: flex;justify-content: flex-end;align-items: center;margin-top: 10px">
-                                                <i-button @click="modifyCommentsInfoList('add',true)">添加</i-button>
-                                            </div>
-                                        </div>
-
-                                        <!--套餐信息-->
-                                        <div class="form-group">
-                                            <div>
-                                                <label>套餐信息</label>
-                                            </div>
-                                            <div v-for="(item,pos) in page_online.combo_list" style="padding: 10px;margin-top:10px;border:1px dashed #c2c2c2;border-radius: 5px">
-                                                <Row type="flex" justify="space-between" align="bottom">
-                                                    <i-col span="10">
-                                                        <label>套餐名</label>
-                                                        <i-input v-model.trim="item.combo_name" type="text"></i-input>
-                                                    </i-col>
-                                                    <i-col span="10">
-                                                        <label>套餐价格</label>
-                                                        <i-input v-model.trim.number="item.combo_price" type="number"></i-input>
-                                                    </i-col>
-                                                    <i-col span="2">
-                                                        <i-button @click="modifyComboList('add',false,pos)">删除</i-button>
-                                                    </i-col>
-                                                </Row>
-                                            </div>
-                                            <div  style="display: flex;justify-content: flex-end;margin-top: 10px">
-                                                <i-button @click="modifyComboList('add',true)">添加</i-button>
-                                            </div>
+                                            <label>页面Tag词</label>
+                                            <Row  type="flex" justify="space-between">
+                                                <i-col span="18">
+                                                    <i-input class=""></i-input>
+                                                </i-col>
+                                                <i-col span="3">
+                                                    <i-button>添加Tag</i-button>
+                                                </i-col>
+                                            </Row>
+                                            <ul>
+                                                <li v-for="val in search_tags" :value="val.id">[[val.tag_name]]</li>
+                                            </ul>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-primary" @click="addPageManage">确定</button>
+                                    <button type="button" class="btn btn-primary" @click="addBlogManage">确定</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade" id="page_modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog  modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                                    </button>
-                                    <h4 class="modal-title" id="">页面修改</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form role="form">
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>链接名称</label>
-                                                    <i-input class="" v-model.trim="page_modify.name" disabled
-                                                           placeholder="必填，链接名称"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>产品编号</label>
-                                                    <i-input class="" disabled v-model.trim="page_modify.product_number"
-                                                           placeholder="必填，产品编号 - ecsp0000000"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="7">
-                                                <div class="form-group">
-                                                    <label>页面标题</label>
-                                                    <i-input class="" v-model.trim="page_modify.title"
-                                                           placeholder="必填，页面标题"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>产品名称</label>
-                                                    <i-input class="" v-model.trim="page_modify.item_bar"
-                                                           placeholder="产品编号必须在ecsp1002000 ~ ecsp1003000之间！"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>折扣标语</label>
-                                                    <i-input class="" v-model.trim="page_modify.discount"
-                                                           placeholder="两件7折，三件5折"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>原价</label>
-                                                    <i-input class="" v-model.trim.number="page_modify.price_old"
-                                                           placeholder="必填，原价 - 1098"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>促销价</label>
-                                                    <i-input class="" v-model.trim.number="page_modify.price_now"
-                                                           placeholder="必填，促销价 - 799"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <Row type="flex" justify="space-between">
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>两件折扣</label>
-                                                    <i-input class="" type="number" step="0.05" max="1" min="0" v-model.trim="page_modify.discount_2_price_code"
-                                                           placeholder="必填，两件折扣 - 0.75"></i-input>
-                                                </div>
-                                            </i-col>
-                                            <i-col span="11">
-                                                <div class="form-group">
-                                                    <label>三件以上折扣</label>
-                                                    <i-input class="" type="number" step="0.05" max="1" min="0" v-model.trim="page_modify.discount_3_price_code"
-                                                           placeholder="必填，三件以上折扣 - 0.5"></i-input>
-                                                </div>
-                                            </i-col>
-                                        </Row>
-
-                                        <!--banner图-->
-                                        <div class="form-group">
-                                            <label>页面banner图</label>
-                                            <div>
-                                                <draggable v-model="page_modify.banner_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                         v-for="(item,index in page_modify.banner_info.imgList">
-                                                        <template v-if="item.status === 'finished'">
-                                                            <img :src="item.url">
-                                                            <div class="demo-upload-list-cover">
-                                                                <Icon v-show="index != 0" type="android-arrow-up"
-                                                                      @click.native="prevImgPos(false,'banner_info',index)"></Icon>
-                                                                <Icon type="ios-trash-outline"
-                                                                      @click.native="modifyHandleRemoveBanner(index)"></Icon>
-                                                                <Icon v-show="index != (page_modify.banner_info.imgList.length - 1)" type="android-arrow-down"
-                                                                      @click.native="nextImgPos(false,'banner_info',index)"></Icon>
-                                                            </div>
-                                                        </template>
-                                                        <template v-else>
-                                                            <Progress v-if="item.showProgress" :percent="item.percentage"
-                                                                      hide-info></Progress>
-                                                        </template>
-                                                    </div>
-                                                </draggable>
-                                                <div>
-
-                                                    <Row>
-                                                        <i-col :sm="4">
-                                                            <Upload
-                                                                    :show-upload-list="false"
-                                                                    :on-success="modifyHandleSuccessBanner"
-                                                                    :format="['jpg','jpeg','png','gif']"
-                                                                    :max-size="2048"
-                                                                    multiple
-                                                                    action="/upload_img">
-                                                                <i-button>本地上传</i-button>
-                                                            </Upload>
-                                                        </i-col>
-                                                        <i-col :sm="12">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control">
-                                                                <span class="input-group-addon" @click="modifyHandleGetUrlImage($event,'banner')">外链图片</span>
-                                                            </div>
-                                                        </i-col>
-                                                    </Row>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--详情图-->
-                                        <div class="form-group">
-                                            <label>页面详情图</label>
-                                            <div>
-                                                <draggable v-model="page_modify.detail_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                     v-for="(item,index) in page_modify.detail_info.imgList">
-                                                    <template v-if="item.status === 'finished'">
-                                                        <img :src="item.url">
-                                                        <div class="demo-upload-list-cover">
-                                                            <Icon v-show="index != 0" type="android-arrow-up"
-                                                                  @click.native="prevImgPos(false,'detail_info',index)"></Icon>
-                                                            <Icon type="ios-trash-outline"
-                                                                  @click.native="modifyHandleRemoveDetail(index)"></Icon>
-                                                            <Icon v-show="index != (page_modify.detail_info.imgList.length - 1)" type="android-arrow-down"
-                                                                  @click.native="nextImgPos(false,'detail_info',index)"></Icon>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                                </draggable>
-                                                <div>
-
-                                                    <Row>
-                                                        <i-col :sm='4'>
-                                                            <Upload
-                                                                    :show-upload-list="false"
-                                                                    :on-success="modifyHandleSuccessDetail"
-                                                                    :format="['jpg','jpeg','png','gif']"
-                                                                    :max-size="2048"
-                                                                    action="/upload_img">
-                                                                <i-button>本地上传</i-button>
-                                                            </Upload>
-                                                        </i-col>
-                                                        <i-col :sm="12">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control">
-                                                                <span class="input-group-addon" @click="modifyHandleGetUrlImage($event,'detail')">外链图片</span>
-                                                            </div>
-                                                        </i-col>
-                                                    </Row>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--参数图-->
-                                        <div class="form-group">
-                                            <label>页面参数图</label>
-                                            <div>
-                                                <draggable v-model="page_modify.parameter_info.imgList" @start="drag=true" @end="drag=false">
-                                                    <div class="demo-upload-list"
-                                                         v-for="(item,index) in page_modify.parameter_info.imgList">
-                                                        <template v-if="item.status === 'finished'">
-                                                            <img :src="item.url">
-                                                            <div class="demo-upload-list-cover">
-                                                                <Icon v-show="index != 0" type="android-arrow-up"
-                                                                      @click.native="prevImgPos(false,'parameter_info',index)"></Icon>
-                                                                <Icon type="ios-trash-outline"
-                                                                      @click.native="modifyHandleRemoveParameter(index)"></Icon>
-                                                                <Icon v-show="index != (page_modify.parameter_info.imgList.length - 1)" type="android-arrow-down"
-                                                                      @click.native="nextImgPos(false,'parameter_info',index)"></Icon>
-                                                            </div>
-                                                        </template>
-                                                    </div>
-                                                </draggable>
-                                                <div>
-
-                                                    <Row>
-                                                        <i-col :sm='4'>
-                                                            <Upload
-                                                                    :show-upload-list="false"
-                                                                    :on-success="modifyHandleSuccessParameter"
-                                                                    :format="['jpg','jpeg','png','gif']"
-                                                                    :max-size="2048"
-                                                                    action="/upload_img">
-                                                                <i-button>本地上传</i-button>
-                                                            </Upload>
-                                                        </i-col>
-                                                        <i-col :sm="12">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control">
-                                                                <span class="input-group-addon" @click="modifyHandleGetUrlImage($event,'parameter')">外链图片</span>
-                                                            </div>
-                                                        </i-col>
-                                                    </Row>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--评论信息-->
-                                        <div class="form-group">
-                                            <div>
-                                                <label>评论信息</label>
-                                            </div>
-
-                                            <div v-for="(item,detailPos) in page_modify.comments_info"
-                                                 style="padding: 10px;margin-top:10px;border:1px dashed #c2c2c2;border-radius: 5px">
-
-                                                <Row type="flex" justify="space-between">
-                                                    <i-col span="9">
-                                                        <label>用户名</label>
-                                                        <i-input v-model.trim="item.user_name" type="text"
-                                                                 placeholder="Enter something..."></i-input>
-                                                    </i-col>
-                                                    <i-col span="9">
-                                                        <label>评论信息</label>
-                                                        <i-input v-model.trim="item.user_comment" type="text"
-                                                                 placeholder="Enter something..."></i-input>
-                                                    </i-col>
-                                                    <i-col span="4">
-                                                        <label>好评分数</label>
-                                                        <div>
-                                                            <label><input type="radio" v-model.trim="item.is_best" :value="true"/> 五星</label>
-                                                            <label><input type="radio" v-model.trim="item.is_best" :value="false"/> 四星半</label>
-                                                        </div>
-                                                    </i-col>
-                                                </Row>
-                                                <div style="margin-top: 10px;">
-
-                                                    <!--<label>图片名称</label>-->
-                                                    <!--<i-input v-model="line.img_title" type="text"></i-input>-->
-                                                    <draggable v-model="item.imgList" @start="drag=true" @end="drag=false">
-                                                        <div style="margin-top: 10px;" class="demo-upload-list"
-                                                             v-for="(objImg,imgPos) in item.imgList">
-                                                            <template v-if="objImg.status === 'finished'">
-                                                                <img :src="objImg.url">
-                                                                <div class="demo-upload-list-cover">
-                                                                    <Icon v-show="imgPos != 0" type="android-arrow-up"
-                                                                          @click.native="prevImgPos(false,'comments_info',imgPos,detailPos)"></Icon>
-                                                                    <Icon type="ios-trash-outline"
-                                                                          @click.native="modifyHandleRemoveIntroduction(detailPos,imgPos)"></Icon>
-                                                                    <Icon v-show="imgPos != (item.imgList.length - 1)" type="android-arrow-down"
-                                                                          @click.native="nextImgPos(false,'comments_info',imgPos,detailPos)"></Icon>
-                                                                </div>
-                                                            </template>
-                                                        </div>
-                                                    </draggable>
-                                                    <div style="margin-top: 10px;">
-                                                        <Row>
-                                                            <i-col :sm="4">
-                                                                <Upload
-                                                                        :show-upload-list="false"
-                                                                        :on-success="modifyHandleSuccessIntroduction"
-                                                                        :format="['jpg','jpeg','png','gif']"
-                                                                        :max-size="2048"
-                                                                        multiple
-                                                                        action="/upload_img">
-                                                                    <i-button @click="page_modify.commentPos = detailPos">本地上传
-                                                                    </i-button>
-                                                                </Upload>
-                                                            </i-col>
-                                                            <i-col :sm="12">
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control">
-                                                                    <span class="input-group-addon" @click="modifyHandleGetUrlImage($event,'introduction',detailPos)">外链图片</span>
-                                                                </div>
-                                                            </i-col>
-                                                            <i-col :sm="{span:4,offset:1}">
-                                                                <i-button @click="modifyCommentsInfoList('modify',false,detailPos)">删除</i-button>
-                                                            </i-col>
-                                                        </Row>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div style="display: flex;justify-content: flex-end;align-items: center;margin-top: 10px">
-                                                <i-button @click="modifyCommentsInfoList('modify',true)">添加</i-button>
-                                            </div>
-                                        </div>
-
-                                        <!--套餐信息-->
-                                        <div class="form-group">
-                                            <div>
-                                                <label>套餐信息</label>
-                                            </div>
-                                            <div v-for="(item,pos) in page_modify.combo_list" style="padding: 10px;margin-top:10px;border:1px dashed #c2c2c2;border-radius: 5px">
-                                                <Row type="flex" justify="space-between" align="bottom">
-                                                    <i-col span="10">
-                                                        <label>套餐名</label>
-                                                        <i-input v-model.trim="item.combo_name" type="text"></i-input>
-                                                    </i-col>
-                                                    <i-col span="10">
-                                                        <label>套餐价格</label>
-                                                        <i-input v-model.trim.number="item.combo_price" type="number"></i-input>
-                                                    </i-col>
-                                                    <i-col span="2">
-                                                        <i-button @click="modifyComboList('modify',false,pos)">删除</i-button>
-                                                    </i-col>
-                                                </Row>
-                                            </div>
-                                            <div  style="display: flex;justify-content: flex-end;margin-top: 10px">
-                                                <i-button @click="modifyComboList('modify',true)">添加</i-button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-primary" @click="modifyPageManage">确定</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <footer><p>Copyright &copy; 2018 MagicHygeia All rights reserved.</p></footer>
                 </main>
             </div>
@@ -907,6 +366,7 @@
 <script src="/static/manage/layer/laydate.js"></script>
 <script src="/static/manage/js/Sortable.min.js"></script>
 <script src="/static/manage/js/vuedraggable.min.js"></script>
+<script src="/static/manage/js/ckeditor/ckeditor.js"></script>
 <script src="/static/manage/js/common/page_manage.js"></script>
 </html>
 

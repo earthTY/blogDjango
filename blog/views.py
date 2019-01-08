@@ -60,11 +60,8 @@ def show_menu_page(req, lang, menu_url, page_num):
     # 获取对应目录下介绍的产品
     menu_pro = article_info.objects.filter(
         categories__lang=lang,
-        is_product=1
+        categories__is_product= 1
     )
-
-    if menu_url!='products':
-        menu_pro=menu_pro.filter(product_menu=menu_name)
 
     menu_pro = menu_pro.order_by("-id").first()
 
@@ -243,7 +240,7 @@ def get_favorite_articles(lang, menu_name, has_product):
     )
 
     if not has_product:
-        obj_articles = obj_articles.filter(is_product= False)
+        obj_articles = obj_articles.filter(categories__is_product=False)
 
     if menu_name:
        obj_articles = obj_articles.filter(categories__menu=menu_name)
@@ -288,7 +285,4 @@ def get_new_tags(lang,menu,len):
 
     data = list(obj_tags)
     return data
-
-
-
 

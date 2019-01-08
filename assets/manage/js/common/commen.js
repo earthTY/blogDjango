@@ -185,12 +185,6 @@ function lay_prompt(prompt,callback,time) {
 //判断用户权限
 var levelMixin = {
     data:function(){
-        /*var user_info = sessionStorage.user_info
-
-        return {
-            user_info : user_info ? JSON.parse(user_info) : location.href ="/manager/login"
-        }*/
-
         return {
             user_info:{
                 level:0

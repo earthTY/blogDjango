@@ -10,8 +10,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.forms.models import model_to_dict
 from blog.models import *
+from django.core.files.storage import FileSystemStorage
 
 import json
+import re
 
 
 # Create your views here.
@@ -84,14 +86,15 @@ def create_article_info(req):
     reqData = (json.loads(req.body))
 
     categories_id = reqData.get('categories_id')
-    title = reqData.get('title')
+    title = reqData.get('title','')
     url_title = reqData.get('url_title', '')
     img_url = reqData.get('img_url' '')
     introduction = reqData.get('introduction','')
-    is_product = reqData.get('is_product', False)
     subject_body = reqData.get('subject_body','')
     product_id = reqData.get('product_id',-1)
+    product_menu = reqData.get('product_menu', -1)
     tag_list = reqData.get('tag_list')
+
 
     obj_article = article_info.objects.filter(
         categories_id=categories_id,
@@ -104,13 +107,11 @@ def create_article_info(req):
             url_title= url_title,
             img_url= img_url,
             introduction= introduction,
-            is_product= is_product,
             subject_body= subject_body,
             product_id= int(product_id),
+            product_menu= int(product_menu),
             categories_id= categories_id
         )
-
-        print(article.id)
 
         for tag in tag_list:
             article_tags.objects.create(
@@ -145,4 +146,81 @@ def get_menu_by_lang(req):
     return Response({
         'code':0,
         'data':obj_datas
+    })
+
+@api_view(['post'])
+def get_menu_products(req):
+    reqData = (json.loads(req.body))
+
+    get_lang = reqData.get('lang', 'us')
+    get_id = reqData.get('menu_id', -1)
+
+    objs=article_info.objects.filter(
+        product_menu = get_id,
+        categories__lang=get_lang
+    )
+
+    if objs:
+        data= list(objs.values())
+    else:
+        data=[]
+
+    return Response({
+        'code':0,
+        'message':'ok',
+        'data':data
+    })
+
+@api_view(['post'])
+def get_tags_by_lang(req):
+    reqData = (json.loads(req.body))
+
+    lang = reqData.get('lang','us')
+
+    obj_tags = tags.objects.filter(lang = lang)
+
+    data = list(obj_tags.values())
+
+    return Response({
+        'code':0,
+        'message':'OK',
+        'data':data
+    })
+
+@api_view(['post'])
+def upload_img(request):
+    payload = request.data
+
+    uploaded_file_url = ''
+    for key in request.FILES:
+        myfile = request.FILES[key]
+        fs = FileSystemStorage()
+        filename = fs.save('img/{}'.format(myfile.name), myfile)
+        uploaded_file_url =  fs.url(filename)
+
+    data = dict(uploaded_file_url=uploaded_file_url)
+    return Response({"code": 0,
+                     "message": "ok",
+                     "data": data
+                     })
+
+@api_view(['post'])
+def upload_img_edit(request):
+    payload = request.data
+
+    uploaded_file_url = ''
+    filename=''
+    for key in request.FILES:
+        myfile = request.FILES[key]
+        fs = FileSystemStorage()
+        filename = fs.save('img/{}'.format(myfile.name), myfile)
+        uploaded_file_url =  fs.url(filename)
+
+    data = dict(uploaded_file_url=uploaded_file_url)
+    return Response({
+        "code": 0,
+        "message": "ok",
+        "uploaded": 1,
+        "fileName": filename,
+        "url": uploaded_file_url
     })
