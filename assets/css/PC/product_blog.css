@@ -116,7 +116,7 @@ a img {
 }
 @font-face {
   font-family: CenturyGothic;
-  src: url("../font/CenturyGothic.ttf");
+  src: url("../../font/CenturyGothic.ttf");
 }
 strong {
   font-weight: bolder;

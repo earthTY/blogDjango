@@ -34,6 +34,10 @@ urlpatterns += [
 
     url(r'^manager/(?P<page>[^/]*)/(?P<sp>[^/]*)$', manager_view.managerS_view, name='managerS_view'),
 
+    url(r'^bs/select_article_by_menu$',manager_view.select_article_by_menu),
+
+    url(r'^bs/modify_article_info$',manager_view.modify_article_info),
+
     url(r'^bs/get_tags_by_lang$',manager_view.get_tags_by_lang),
 
     url(r'^bs/get_menu_products$',manager_view.get_menu_products),

@@ -41,7 +41,13 @@
                 </header>
                 {% for article in data_list %}
                     <section class="product_item">
-                        <h2 class="article_title"><a>{{ article.title }}</a></h2>
+                        <h2 class="article_title">
+                            {% if article.is_product %}
+                                <a href="products/{{ article.url_title }}">{{ article.title }}</a>
+                            {% else %}
+                                <a href="articles/{{ article.url_title }}">{{ article.title }}</a>
+                            {% endif %}
+                        </h2>
                         <div class="detail clearfix">
                             <div class="pro_img">
                                 <img src="{{ article.img_url }}" alt="{{ article.title }}" />

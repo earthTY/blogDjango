@@ -26,6 +26,7 @@ class article_info(models.Model):
     subject_body = models.TextField('文章主体', default='')
     product_id = models.IntegerField('对应产品编号',default=-1)
     product_menu = models.IntegerField('产品目录',default= -1)
+    status = models.IntegerField('发布状态', default= 0)
 
 class tags(models.Model):
     tag_name = models.CharField('Tag关键词', max_length=50)
@@ -35,3 +36,4 @@ class tags(models.Model):
 class article_tags(models.Model):
     article_id = models.ForeignKey(article_info)
     tag_id = models.ForeignKey(tags)
+    is_del = models.BooleanField('是否禁用',default= False)

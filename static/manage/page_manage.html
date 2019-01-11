@@ -52,6 +52,18 @@
         .ivu-poptip-popper{
             min-width: auto;
         }
+
+        .success{
+            background: #0f74a8;
+            color: #ffffff;
+        }
+
+        .gradeA .content{
+            max-width: 300px;
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 <body>
@@ -76,43 +88,20 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     页面列表
-                                    <a class="btn btn-success" @click="openBlogOnlineView"
+                                    <a class="btn btn-success" @click="openBlogOnlineView(false)"
                                        style="float: right">页面上新</a>
                                 </div>
                                 <div class="panel-heading">
                                     <form style="border-radius:5px;border:1px dashed rgb(194, 194, 194);padding: 10px;" class="form-inline">
                                         <div class="form-group">
-                                            <label for="start_date">开始时间</label>
-                                            <input type="text" class="form-control" id="start_date" placeholder=""
-                                                   v-model="start_time" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="end_date">结束时间</label>
-                                            <input type="text" class="form-control" id="end_date" placeholder=""
-                                                   v-model="end_time" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="end_date">订单状态</label>
-                                            <select class="form-control" v-model="status">
-                                                <option value="-1">全部</option>
-                                                <option value="0">未发布</option>
-                                                <option value="1">已发布</option>
-                                                <option value="2">已下架</option>
+                                            <label>博客目录</label>
+                                            <select class="form-control" v-model="menu_id">
+                                                <option :value="-1">全部</option>
+                                                <option v-for="val in menu_list" :value="val.id">[[val.menu]]</option>
                                             </select>
                                         </div>
-                                        <button class="btn btn-info" type="button" @click="Search(true,0)">搜索</button>
+                                        <button class="btn btn-info" type="button" @click="SearchByMenu(true,0)">搜索</button>
                                     </form>
-                                    {% comment %}<form style="border-radius:5px;border:1px dashed rgb(194, 194, 194);padding: 10px;margin-top: 20px" class="form-inline">
-                                        <div class="form-group">
-                                            <label>产品编号</label>
-                                            <div  style="display: inline-block;width: 200px">
-                                                <i-select filterable v-model="product_number">
-                                                    <i-option v-for="val in product_number_list_info" :value="val.product_number">[[val.product_number]] - [[val.item_bar]]</i-option>
-                                                </i-select>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-info" type="button" @click="Search(true,1)">搜索</button>
-                                    </form>{% endcomment %}
                                 </div>
                                 <div class="panel-body">
                                     <div class="">
@@ -124,23 +113,37 @@
                                                     <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc">序号</th>
-                                                        <th class="sorting">产品编号</th>
-                                                        <th class="sorting">产品名称</th>
-                                                        <th class="sorting">链接名称</th>
-                                                        <th class="sorting">页面标题</th>
+                                                        <th class="sorting">主图</th>
+                                                        <th class="sorting">标题</th>
+                                                        <th class="sorting">预览</th>
+                                                        <th class="sorting">目录</th>
                                                         <th class="sorting">发布状态</th>
                                                         <th class="sorting">操作</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {% comment %}<tr class="gradeA odd" v-for="(item,index) in online_page_list">
-                                                        <td class="sorting_1">[[item.No]]</td>
-                                                        <td class=" ">[[item.product_number]]</td>
-                                                        <td class=" ">[[item.item_bar]]</td>
-                                                        <td class="">[[item.name]]</td>
+                                                    <tr class="gradeA odd" v-for="(item,index) in article_list">
+                                                        <td class="sorting_1">
+                                                            <div class="content">[[item.No]]</div>
+                                                        </td>
                                                         <td class="">
-                                                            <!--<a :href="'/'+item.link_url" target="_blank">[[item.title]]</a>-->
-
+                                                            <div><img width="100" :src="item.img_url" alt=""></div>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <div class="content">[[item.title]]</div>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <div class="content">[[item.introduction]]</div>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <div class="content">[[item.categories.menu]]</div>
+                                                        </td>
+                                                        <td class="">
+                                                            <span class="label label-danger" v-if="item.status == 0"> 未发布 </span>
+                                                            <span class="label label-success" v-if="item.status == 1"> 已发布 </span>
+                                                            <span class="label label-default" v-if="item.status == 2"> 已下架 </span>
+                                                        </td>
+                                                       {% comment %} <td class="">
                                                             <Poptip  placement="right">
                                                                 <i-button size="small">[[item.title]]</i-button>
                                                                 <div slot="content">
@@ -148,19 +151,15 @@
                                                                     <a style="margin-left: 15px" v-show="item.status == 1" :href="'/'+item.link_url+'?cf='" target="_blank">页面查看</a>
                                                                 </div>
                                                             </Poptip >
-                                                        </td>
-                                                        <td class="">
-                                                            <span class="label label-danger" v-if="item.status == 0"> 未发布 </span>
-                                                            <span class="label label-success" v-if="item.status == 1"> 已发布 </span>
-                                                            <span class="label label-default" v-if="item.status == 2"> 已下架 </span>
-                                                        </td>
+                                                        </td>{% endcomment %}
+
                                                         <td class="center ">
-                                                            <a @click="openModifyPageView(item)" style="cursor: pointer;">页面修改</a>
-                                                            <a @click="pagePublishOrStop(item,1,index)" style="cursor: pointer;">[[item.status == 1 ? "重新发布" : "发布"]]</a>
+                                                            <a @click="openBlogOnlineView(true,item)" style="cursor: pointer;">页面修改</a>
+                                                            {% comment %}<a @click="pagePublishOrStop(item,1,index)" style="cursor: pointer;">[[item.status == 1 ? "重新发布" : "发布"]]</a>
                                                             <a v-if="item.status == 1" @click="pagePublishOrStop(item,0,index)" style="cursor: pointer;">取消发布</a>
-                                                            <a v-if="item.status != 2" @click="pagePublishOrStop(item,2,index)" style="cursor: pointer;">下架</a>
+                                                            <a v-if="item.status != 2" @click="pagePublishOrStop(item,2,index)" style="cursor: pointer;">下架</a>{% endcomment %}
                                                         </td>
-                                                    </tr>{% endcomment %}
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -212,7 +211,7 @@
                             <!--End Advanced Tables -->
                         </div>
                     </div>
-                    <div class="modal fade" id="blog_online" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    <div class="modal fade" id="blog_view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog  modal-lg">
                             <div class="modal-content">
@@ -223,38 +222,38 @@
                                 </div>
                                 <div class="modal-body">
                                     <form role="form">
-                                        <div class="form-group">
-                                            <label>请选择添加类型</label>
+                                        <div class="form-group" v-if="!blog_view.isModify">
+                                            <label>请选择类型</label>
                                             <div>
-                                                <label><input v-model="blog_online.type" value="0" type="radio"> 博客页面</label>
-                                                <label><input v-model="blog_online.type" value="1" type="radio"> 产品页面</label>
+                                                <label @click="changeBlogType(0)"><input v-model="blog_view.type" value="0" type="radio"> 博客页面</label>
+                                                <label @click="changeBlogType(1)"><input v-model="blog_view.type" value="1" type="radio"> 产品页面</label>
                                             </div>
                                         </div>
 
-                                        <div class="form-group" :key="blog_online.type">
-                                            <label>请选择博客目录</label>
-                                            <i-select v-model="blog_online.menu_id" @on-change="getMenuProduct(blog_online.menu_id)">
+                                        <div class="form-group" :key="blog_view.type">
+                                            <label>请选择目录</label>
+                                            <i-select v-model="blog_view.menu_id" @on-change="getMenuProduct(blog_view.menu_id,true)">
                                                 <i-option v-for="val in blog_menu_list" :value="val.id">[[val.menu]]</i-option>
                                             </i-select>
                                         </div>
 
-                                        <Row v-if="blog_online.type == 0" type="flex" justify="space-between">
+                                        <Row v-if="blog_view.type == 0" type="flex" justify="space-between">
                                             <i-col span="7">
                                                 <div class="form-group">
-                                                    <label>请输入博客名称</label>
-                                                    <i-input class="" v-model.trim="blog_online.blog_title"></i-input>
+                                                    <label>请输入名称</label>
+                                                    <i-input class="" v-model.trim="blog_view.blog_title"></i-input>
                                                 </div>
                                             </i-col>
                                             <i-col span="7">
                                                 <div class="form-group">
                                                     <label>页面关键词</label>
-                                                    <i-input class="" v-model.trim="blog_online.keywords"></i-input>
+                                                    <i-input class="" v-model.trim="blog_view.keywords"></i-input>
                                                 </div>
                                             </i-col>
                                             <i-col span="7">
                                                 <div class="form-group">
                                                     <label>对应产品</label>
-                                                    <i-select v-model="blog_online.product_id">
+                                                    <i-select v-model="blog_view.product_id">
                                                         <i-option v-for="val in menu_products" :value="val.id">[[val.title]]</i-option>
                                                     </i-select>
                                                 </div>
@@ -265,20 +264,20 @@
                                             <i-col span="11">
                                                 <div class="form-group">
                                                     <label>请输入博客名称</label>
-                                                    <i-input class="" v-model.trim="blog_online.blog_title"></i-input>
+                                                    <i-input class="" v-model.trim="blog_view.blog_title"></i-input>
                                                 </div>
                                             </i-col>
                                             <i-col span="11">
                                                 <div class="form-group">
                                                     <label>页面关键词</label>
-                                                    <i-input class="" v-model.trim="blog_online.keywords"></i-input>
+                                                    <i-input class="" v-model.trim="blog_view.keywords"></i-input>
                                                 </div>
                                             </i-col>
                                         </Row>
 
                                         <div class="form-group">
                                             <label>请输入文章预览</label>
-                                            <i-input class="" v-model.trim="blog_online.introduction"></i-input>
+                                            <i-input class="" v-model.trim="blog_view.introduction"></i-input>
                                         </div>
 
                                         <!--页面主图-->
@@ -287,8 +286,8 @@
                                             <Row  type="flex" justify="space-between">
                                                 <i-col span="18">
                                                     <div class="demo-upload-list">
-                                                    <template v-if="blog_online.img_info.status == true">
-                                                        <img :src="blog_online.img_info.url">
+                                                    <template v-if="blog_view.img_info.status == true">
+                                                        <img :src="blog_view.img_info.url">
                                                         {% comment %}<div class="demo-upload-list-cover">
                                                             <Icon v-show="index != 0" type="android-arrow-up"
                                                                   @click.native="prevImgPos(true,'banner_info',index)"></Icon>
@@ -327,7 +326,7 @@
                                             </Row>
                                         </div>
 
-                                        <div class="form-group" v-show="blog_online.type == 0">
+                                        <div class="form-group" v-show="blog_view.type == 0">
                                             <textarea id="rich_text"></textarea>
                                         </div>
 
@@ -335,21 +334,31 @@
                                             <label>页面Tag词</label>
                                             <Row  type="flex" justify="space-between">
                                                 <i-col span="18">
-                                                    <i-input class=""></i-input>
+                                                    <i-input class="" v-model="tag_search"></i-input>
                                                 </i-col>
                                                 <i-col span="3">
-                                                    <i-button>添加Tag</i-button>
+                                                    <i-button @click="addNewTags">添加Tag</i-button>
                                                 </i-col>
                                             </Row>
-                                            <ul>
-                                                <li v-for="val in search_tags" :value="val.id">[[val.tag_name]]</li>
-                                            </ul>
+                                            <Row style="margin-top: 10px" type="flex" justify="space-between">
+                                                <i-col span="11">
+                                                    <ul style="height: 200px;overflow-y: auto;padding: 10px;border: 1px solid #ccc;">
+                                                        <li style="cursor: pointer;padding-left: 5px;margin: 5px 0;" :class="{success:val.select}" v-for="(val,index) in search_tags" @click="addSelectTag(val,index)">[[val.tag_name]]</li>
+                                                    </ul>
+                                                </i-col>
+                                                <i-col span="11">
+                                                    <ul style="height: 200px;overflow-y: auto;padding: 10px;border: 1px solid #ccc;">
+                                                        <li style="cursor: pointer;padding-left: 5px;margin: 5px 0;" v-for="(val,index) in blog_view.tag_list" @click="removeSelectTag(val,index)">[[val.tag_name]]</li>
+                                                    </ul>
+                                                </i-col>
+                                            </Row>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-primary" @click="addBlogManage">确定</button>
+                                    <button type="button" class="btn btn-primary" @click="modifyBlogManage" v-if="blog_view.isModify">确定</button>
+                                    <button type="button" class="btn btn-primary" @click="addBlogManage" v-else>确定</button>
                                 </div>
                             </div>
                         </div>

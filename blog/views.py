@@ -13,6 +13,11 @@ from blog.models import *
 import json
 import re
 import math
+from django.conf import settings
+from django.template.loader import render_to_string
+import os,sys
+import encodings
+
 
 
 # Create your views here.
@@ -109,6 +114,10 @@ def show_article(req,lang,url_title):
     else:
         lang = lang[0:-1]
 
+    #当前文件静态路径
+    page_static_url = 'static/{}/articles/{}-{}.html'.format(lang, lang, url_title)
+
+
     obj_article = get_article_by_lang_name(lang,url_title)
 
     if not obj_article:
@@ -117,6 +126,23 @@ def show_article(req,lang,url_title):
         else:
             return HttpResponseRedirect('/{}/404.html'.format(lang))
     else:
+
+
+        # 查看上线页面
+        if not url_title.endswith('_preview'):
+            # 页面未上线跳转404页面
+            if obj_article.status != 1:
+                if lang == "us":
+                    return HttpResponseRedirect('/404.html'.format(lang))
+                else:
+                    return HttpResponseRedirect('/{}/404.html'.format(lang))
+            else:
+                if os.path.exists(page_static_url):
+                    return render(req, "{}/articles/{}-{}.html".format(lang, lang, url_title))
+
+
+
+
         one_json = model_to_dict(obj_article)
 
         one_json["categories_info"] = model_to_dict(obj_article.categories)
@@ -146,6 +172,14 @@ def show_article(req,lang,url_title):
         one_json["new_tags"] = new_tags
         one_json["domain"] = getDomain(req,lang)
 
+        #博客页生成静态页面
+        if obj_article.product_id != -1:
+            if not url_title.endswith('_previerw'):
+                # 页面未上线跳转404页面
+                if obj_article.status == 1:
+                    content = render_to_string('{}/articles.html'.format(lang), one_json)
+                    with open(page_static_url,'w') as f:
+                        f.write(content.encode('utf-8'))
 
         if obj_article.product_id != -1:
             return render(req,'{}/articles.html'.format(lang),one_json)
@@ -217,7 +251,7 @@ def getDomain(req,lang):
 # 根据文章ID获取对应文章Tag关键词
 def get_article_tags(article_id):
     tag_list = []
-    for item in article_tags.objects.filter(article_id_id=article_id):
+    for item in article_tags.objects.filter(article_id_id=article_id,is_del=False):
         tag_list.append(model_to_dict(item.tag_id))
     return tag_list
 
@@ -264,7 +298,7 @@ def get_blog_product(product_id):
 
 # 根据语言、获取最新的N条关键词
 def get_new_tags(lang,menu,len):
-    obj_tags = article_tags.objects.all()
+    obj_tags = article_tags.objects.filter(is_del=False)
 
     if(lang):
         obj_tags = obj_tags.filter(article_id__categories__lang=lang)

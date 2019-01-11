@@ -9,12 +9,12 @@ var vm = new Vue({
         count: 10,
         total:0,
 
-        status:-1,
 
-        start_time:"",
-        end_time:"",
+        menu_id:"-1",
+        article_list:[],
 
-        blog_online:{
+
+        blog_view:{
             "menu_id":"",
             "blog_title":"",
             "keywords":"",
@@ -71,7 +71,7 @@ var vm = new Vue({
 
         this.getTagsByLang()
 
-        CKEDITOR.replace('rich_text',{
+        var editor=CKEDITOR.replace('rich_text',{
             height:500
         })
     },
@@ -82,57 +82,32 @@ var vm = new Vue({
     },
     methods:{
         //查询页面信息
-        Search:function(reset,type){
+        SearchByMenu:function(reset,type){
             var vm = window.vm || this
-
-            if(type !== undefined){
-                vm.type = type
-            }
-
-            if(vm.type && vm.product_number == ""){
-                lay_prompt("请选择产品编号！")
-                return
-            }
 
             if(reset){
                 vm.start = 0
             }
 
-            var now_time = MC_GetDay(0);
-            var start_day = daysBetween(now_time, this.start_time);
-            var end_day = daysBetween(now_time, this.end_time) + 1;
-
-            if(start_day>=end_day){
-                lay_prompt("开始时间不能大于结束时间！")
-                return
-            }
-
-            var param = vm.type ? {
-                product_number:vm.product_number
-            } : {
+            var param = {
+                menu_id:vm.menu_id,
                 start:vm.start,
-                count:vm.count,
-                start_time:start_day,
-                end_time:end_day,
-                status:vm.status
+                page_count:vm.count,
             }
 
-            var url = "/get_product_info"
+            var url = "/bs/select_article_by_menu"
 
             $.ajax({
                 url:url,
                 method:"post",
-                data:param
+                contentType: "application/json; charset=utf-8",
+                data:JSON.stringify(param)
             }).done(function (retVal) {
                 if(retVal && retVal.code ==0 ){
                     for(var i=0;i<retVal.data.length;i++){
                         retVal.data[i].No = i+1
                     }
-                    vm.online_page_list = retVal.data
-
-                    vm.total = retVal.total_count
-                    var pageCount = Math.ceil(vm.total / vm.count)
-                    initPageList((vm.start / vm.count)+1, pageCount == 0 ? 1 : pageCount, $("#pagination"), vm)
+                    vm.article_list = retVal.data
                 }
             })
         },
@@ -164,41 +139,81 @@ var vm = new Vue({
 
         handleSuccessBlogImg:function(res){
             if(res.code == 0){
-                this.blog_online.img_info = {
+                this.blog_view.img_info = {
                     status:true,
                     url:res.data.uploaded_file_url
                 }
             }
         },
 
-        openBlogOnlineView:function () {
-            this.blog_online = {
-                "menu_id":"",
-                "blog_title":"",
-                "keywords":"",
-                "introduction":"",
-                "type":0,
-                img_info:{
-                    status:false,
-                    url:""
+        openBlogOnlineView:function (isModify,blogInfo) {
+            if (isModify){
+                this.blog_view = {
+                    "isModify":isModify,
+                    "blog_id":blogInfo.id,
+                    "menu_id":blogInfo.categories.id,
+                    "blog_title":blogInfo.title,
+                    "keywords":blogInfo.keyword,
+                    "introduction":blogInfo.introduction,
+                    "subject_body":blogInfo.subject_body,
+                    "type":+(blogInfo.categories.is_product),
+                    "product_id":blogInfo.product_id,
+                    "tag_list":blogInfo.tags,
+                    img_info:{
+                        status:true,
+                        url:blogInfo.img_url
+                    }
+                }
+
+                this.getMenuProduct(this.blog_view.menu_id,false)
+            } else {
+                this.blog_view = {
+                    "isModify":isModify,
+                    "menu_id":"",
+                    "blog_title":"",
+                    "keywords":"",
+                    "introduction":"",
+                    "subject_body":"",
+                    "product_id":"",
+                    "type":0,
+                    "tag_list":[],
+                    img_info:{
+                        status:false,
+                        url:""
+                    }
                 }
             }
 
-            $("#blog_online").modal()
+            var that = this
+
+            this.tags_list.forEach(function (value) {
+                if(that.blog_view.tag_list.length == 0){
+                    value.select = false
+                    return
+                }
+                (-1 == that.blog_view.tag_list.findIndex(function (item) {
+                    return value.id == item.id
+                })) ? value.select = false : value.select = true
+            })
+
+            this.changeBlogType(this.blog_view.type)
+
+            CKEDITOR.instances.rich_text.setData(this.blog_view.subject_body)
+
+            $("#blog_view").modal()
         },
 
-        //上新时图片文件上传结束
 
         addBlogManage:function () {
-            var blogInfo = this.blog_online
+            var blogInfo = this.blog_view
 
-            if(blogInfo.type == 1){
+            if(blogInfo.type == 0){
                 blogInfo.product_menu = blogInfo.menu_id
             }else {
                 blogInfo.product_menu = -1
             }
 
-            if(!checkBlogParam(blogInfo)){
+            if(!this.checkBlogParam(blogInfo)){
                 return
             }
 
@@ -214,8 +229,10 @@ var vm = new Vue({
                 introduction:blogInfo.introduction,
                 product_id:blogInfo.product_id,
                 product_menu:blogInfo.product_menu,
-                tag_list:[],
-                subject_body:""
+                tag_list:blogInfo.tag_list.map(function (value) {
+                    return value.id
+                }),
+                subject_body:CKEDITOR.instances.rich_text.getData()
             }
 
             $.ajax({
@@ -226,16 +243,68 @@ var vm = new Vue({
             }).done(function (retVal) {
                 if(retVal && retVal.code == 0){
                     lay_prompt("页面上新成功!")
+                    vm.SearchByMenu(false)
+                    $("#blog_view").modal("hide")
                 }else {
                     lay_prompt('页面上新失败!')
                 }
             })
 
-            function checkBlogParam() {
-                return true
-            }
+
 
         },
+
+        checkBlogParam:function () {
+            return true
+        },
+
+        modifyBlogManage:function(){
+            var blogInfo = this.blog_view
+
+            if(blogInfo.type == 1){
+                blogInfo.product_id = -1
+                blogInfo.product_menu = -1
+            }
+
+            if(!this.checkBlogParam(blogInfo)){
+                return
+            }
+
+            var param_url_title = blogInfo.blog_title.toLowerCase().replace(/[^A-Za-z0-9]+/g,"-")
+
+            var param = {
+                id:blogInfo.blog_id,
+                categories_id:blogInfo.menu_id,
+                title:blogInfo.blog_title,
+                url_title:param_url_title.endsWith("-")?param_url_title.substring(0,param_url_title.length-1):param_url_title,
+                img_url:blogInfo.img_info.url,
+                introduction:blogInfo.introduction,
+                product_id:blogInfo.product_id,
+                product_menu:blogInfo.product_menu,
+                tag_list:blogInfo.tag_list.map(function (value) {
+                    return value.id
+                }),
+                subject_body:CKEDITOR.instances.rich_text.getData()
+            }
+
+            var url = '/bs/modify_article_info'
+
+            $.ajax({
+                url:url,
+                method:"post",
+                contentType: "application/json; charset=utf-8",
+                data:JSON.stringify(param)
+            }).done(function (retVal) {
+                if(retVal && retVal.code == 0){
+                    lay_prompt("页面修改成功!")
+                    vm.SearchByMenu(false)
+                    $("#blog_view").modal("hide")
+                }else {
+                    lay_prompt('页面修改失败!')
+                }
+            })
+        },
+
 
         getMenuByLang:function () {
             var url = "/bs/get_menu_by_lang"
@@ -263,12 +332,15 @@ var vm = new Vue({
                 data:JSON.stringify({})
             }).done(function(retVal){
                 if(retVal && retVal.code == 0){
+                    for(item in retVal.data){
+                        retVal.data[item]["select"] = false
+                    }
                    vm.tags_list = retVal.data
                 }
             })
         },
 
-        getMenuProduct:function (menu_id) {
+        getMenuProduct:function (menu_id,clear_proId) {
             var url = "/bs/get_menu_products"
 
             $.ajax({
@@ -280,22 +352,66 @@ var vm = new Vue({
                 })
             }).done(function(retVal){
                 vm.menu_products = retVal.data
-                vm.blog_online.product_id = ""
+                if(clear_proId){
+                    vm.blog_view.product_id = ""
+                }
             })
+        },
+
+
+        //添加tag词
+        addNewTags:function(){
+
+            var that = this
+
+            var url="/bs/create_tag"
+
+            $.ajax({
+                url:url,
+                method:"post",
+                data:JSON.stringify({
+                    tag_name:this.tag_search.trim()
+                })
+            }).done(function (retVal) {
+                if(retVal && retVal.code == 0){
+                    retVal.data["select"] = false
+                    that.tags_list.push(retVal.data)
+                }
+            })
+        },
+
+
+        addSelectTag:function (val,index) {
+            if((-1 ==this.blog_view.tag_list.findIndex(function (value) {
+                return value.id == val.id
+            }))){
+                this.blog_view.tag_list.push(val)
+                val.select = true
+            }
+        },
+        removeSelectTag:function (val,index) {
+            this.blog_view.tag_list.splice(index,1)
+            var tag_index=this.tags_list.findIndex(function (item) {
+                return item.id == val.id
+            })
+
+            vm.$set(this.tags_list[tag_index],"select",false)
+        },
+
+        changeBlogType:function (type) {
+
+
+            if(type == 0){
+                this.blog_view.type=0
+                this.blog_menu_list = this.menu_list.filter(function (value) {
+                    return !value.is_product
+                })
+            }else{
+                this.blog_view.type=1
+                this.blog_menu_list = this.menu_list.filter(function (value) {
+                    return value.is_product
+                })
+            }
         }
     },
-})
-
-vm.$watch("blog_online.type",function () {
-    this.blog_online.menu_id = ""
-
-    if(this.blog_online.type==0){
-        this.blog_menu_list = this.menu_list.filter(function (value) {
-            return !value.is_product
-        })
-    }else{
-        this.blog_menu_list = this.menu_list.filter(function (value) {
-            return value.is_product
-        })
-    }
 })
